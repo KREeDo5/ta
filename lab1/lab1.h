@@ -4,5 +4,11 @@
 #pragma once
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <map>
+#include <string>
+#include <Windows.h>
 
 // TODO: установите здесь ссылки на дополнительные заголовки, требующиеся для программы.
