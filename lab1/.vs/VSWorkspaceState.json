@@ -12,8 +12,10 @@
     ]
   },
   "ExpandedNodes": [
-    ""
+    "",
+    "\\out",
+    "\\out\\build"
   ],
-  "SelectedNode": "\\CMakeLists.txt",
+  "SelectedNode": "\\lab1.cpp",
   "PreviewInSolutionExplorer": false
 }
