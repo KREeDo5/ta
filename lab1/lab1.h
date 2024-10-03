@@ -10,5 +10,8 @@
 #include <map>
 #include <string>
 #include <Windows.h>
+#include <algorithm>
+
+using namespace std;
 
 // TODO: установите здесь ссылки на дополнительные заголовки, требующиеся для программы.
