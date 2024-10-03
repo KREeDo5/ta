@@ -130,10 +130,10 @@ static void WriteMooreTable(ostream& output, const vector<Move>& listOfQ, const 
 // Преобразование автомата Мили в Мура
 static void MealyToMoore(istream& input, ostream& output)
 {
-    vector<string> listOfS = ReadSignals(input);  // Чтение первой строки (состояния автомата)
+    vector<string> listOfS = ReadSignals(input);
     vector<Move> listOfQ;
     vector<string> listOfX;
-    vector<vector<Move>> table = ReadMealyTable(input, listOfX, listOfQ);  // Чтение таблицы автомата
+    vector<vector<Move>> table = ReadMealyTable(input, listOfX, listOfQ);
 
     // Сортировка состояний автомата Мура
     sort(
@@ -145,7 +145,7 @@ static void MealyToMoore(istream& input, ostream& output)
         }
     );
 
-    WriteMooreTable(output, listOfQ, listOfX, table, listOfS);  // Запись таблицы автомата Мура
+    WriteMooreTable(output, listOfQ, listOfX, table, listOfS);
 }
 
 // Преобразование автомата Мура в Мили
