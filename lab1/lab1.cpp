@@ -1,113 +1,66 @@
 ﻿#include "lab1.h"
 
-using namespace std;
-
-// уточнить про использование STL
-
-vector<vector<string>> readCSV(const string& filename)
+int main(int argc, char* argv[])
 {
-    ifstream file(filename);
-    vector<vector<string>> table;
-    string line;
+	std::string mode = argv[1];
+	if (mode == "moore-to-mealy")
+	{
+		std::ifstream input(argv[2]);
+		std::ofstream output(argv[3]);
+		std::map<std::string, std::string> moves;
+		std::string tempStr;
 
-    while (getline(file, line))
-    {
-        stringstream stream(line);
-        string cell;
-        vector<string> row;
-        //сортируем строку
-        while (getline(stream, cell, ';'))
-        {
-            row.push_back(cell);
-        }
-        table.push_back(row);
-    }
+		{
+			getline(input, tempStr);
 
-    return table;
+			size_t pos = tempStr.find(';');
+			if (pos != std::string::npos) {
+				tempStr = tempStr.substr(pos + 1);  // Убираем всё до первого ';'
+			}
 
-    /*
-           X
-    ------->
-    |      
-    |
-    |
- Y  V 
+			std::vector<std::string> listOfY;
+			std::stringstream ss(tempStr);
+			std::string item;
 
-    y = row = [x0,.., xn]
-    table = [y0,..,yk]
+			while (getline(ss, item, ';')) {
+				listOfY.push_back(item);
+			}
 
-    [        [   
-      y0,      [x0,..,xn]0,
-      ..., =   ..,
-      yk       [x0,..,xn]k
-    ]        ]
+			getline(input, tempStr);
+			output << tempStr << std::endl;//вывод первой строки _|a0|a1|a2|a3|a4|
 
-    */
-}
+			while (getline(input, tempStr)) {
+				size_t pos = 0;
+				int count = 0; // Счетчик для отслеживания количества ';'
+				size_t yIndex = 0;
 
-void writeCSV(const string& filename, const vector<vector<string>>& table)
-{
-    ofstream file(filename);
-    // проход по `y`
-    for (const auto& row : table)
-    {
-        // проход по `x`
-        for (size_t i = 0; i < row.size(); ++i)
-        {
-            file << row[i];
-            //проверяем последняя это ячейка или нет
-            if (i < row.size() - 1)
-                file << ";";
-        }
-        file << endl;
-    }
-}
+				while ((pos = tempStr.find(';', pos)) != std::string::npos) {
+					count++;
+					// Если это второй или последующий ';' и есть элементы в listOfY
+					if (count > 1 && yIndex < listOfY.size()) {
+						tempStr.insert(pos, "/" + listOfY[yIndex]);
+						pos += listOfY[yIndex].length() + 1;
+						yIndex++;
+					}
+					pos++;
+				}
 
-vector<vector<string>> mealyToMoore(const vector<vector<string>>& mealyTable)
-{
-    vector<vector<string>> mooreTable;
+				if (yIndex < listOfY.size()) {
+					tempStr += "/" + listOfY[yIndex]; // Добавляем оставшийся элемент перед концом строки
+				}
 
-    return mooreTable;
-}
+				output << tempStr << std::endl;
+			}
 
-vector<vector<string>> mooreToMealy(const vector<vector<string>>& mooreTable)
-{
-    vector<vector<string>> mealyTable;
+		}
 
-    return mealyTable;
-}
-
-int main(int argc, char* argv[]) 
-{
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
-
-    if (argc != 4) 
-    {
-        cerr << "Введите команду в формате: " << argv[0] << " [mealy-to-moore/moore-to-mealy] inputFileName.csv outputFileName.csv" << endl;
-        return 1;
-    }
-
-    string mode = argv[1];
-    string inputFileName = argv[2];
-    string outputFileName = argv[3];
-
-    vector<vector<string>> inputTable = readCSV(inputFileName);
-    vector<vector<string>> outputTable;
-
-    if (mode == "mealy-to-moore")
-    {
-        outputTable = mealyToMoore(inputTable);
-    } else if (mode == "moore-to-mealy")
-    {
-        outputTable = mooreToMealy(inputTable);
-    } else
-    {
-        cerr << "Некорректный режим. Используйте mealy-to-moore или moore-to-mealy." << endl;
-        return 1;
-    }
-
-    writeCSV(outputFileName, outputTable);
-
-    return 0;
+		input.close();
+		output.close();
+		return 0;
+	}
+	else
+	{
+		std::cout << "Wrong mode";
+		return 1;
+	}
 }
