@@ -20,10 +20,7 @@ static vector<Move>::iterator FindMoveInVector(vector<Move>& vector, const Move&
 static void AddInitialState(vector<Move>& listOfQ, const string& initialState, const string& defaultOutput)
 {
     Move initialMove = { initialState, defaultOutput };
-    if (FindMoveInVector(listOfQ, initialMove) == listOfQ.end())
-    {
-        listOfQ.insert(listOfQ.begin(), initialMove);
-    }
+    listOfQ.insert(listOfQ.begin(), initialMove);
 }
 
 
