@@ -17,6 +17,16 @@ static vector<Move>::iterator FindMoveInVector(vector<Move>& vector, const Move&
     );
 }
 
+static void AddInitialState(vector<Move>& listOfQ, const string& initialState, const string& defaultOutput)
+{
+    Move initialMove = { initialState, defaultOutput };
+    if (FindMoveInVector(listOfQ, initialMove) == listOfQ.end())
+    {
+        listOfQ.insert(listOfQ.begin(), initialMove);
+    }
+}
+
+
 static int GetMoveIndex(const vector<Move>& list, const Move& move)
 {
     for (int i = 0; i < list.size(); ++i)
@@ -134,7 +144,19 @@ static void MealyToMoore(istream& input, ostream& output)
     vector<Move> listOfQ;
     vector<string> listOfX;
     vector<vector<Move>> table = ReadMealyTable(input, listOfX, listOfQ);
-
+    bool foundInListOfQ = false;
+    for (const auto& move : listOfQ)
+    {
+        if (move.s == listOfS[0])
+        {
+            foundInListOfQ = true;
+            break;
+        }
+    }
+    if (!foundInListOfQ)
+    {
+        AddInitialState(listOfQ, listOfS[0], "-");
+    }
     // Сортировка состояний автомата Мура
     sort(
         listOfQ.begin(), 
