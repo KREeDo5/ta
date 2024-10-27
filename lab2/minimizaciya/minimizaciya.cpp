@@ -138,6 +138,21 @@ static void MealyMin(istream& input, ostream& output)
     Sleep(1000);
 }
 
+static void Minimize(istream& input, ostream& output, const string& mode)
+{
+    if (mode == MOORE)
+    {
+        MooreMin(input, output);
+        return;
+    }
+    if (mode == MEALY)
+    {
+        MealyMin(input, output);
+        return;
+    }
+    throw std::ios_base::failure(ERROR_MODE);
+}
+
 int main(int argc, char* argv[])
 {
 	SetConsoleCP(1251);
@@ -153,19 +168,15 @@ int main(int argc, char* argv[])
 	ifstream input(argv[2]);
 	ofstream output(argv[3]);
 
-	if (mode == MOORE)
-	{
-		MooreMin(input, output);
-	}
-	else if (mode == MEALY)
-	{
-		MealyMin(input, output);
-	}
-	else
-	{
-		cerr << ERROR_MODE << endl;
-		return 1;
-	}
+    try
+    {
+        Minimize(input, output, mode);
+    }
+    catch (const exception& e)
+    {
+        cout << e.what() << endl;
+        return 1;
+    }
 
 	return 0;
 }
