@@ -145,7 +145,7 @@ int main(int argc, char* argv[])
 
 	if (argc != 4)
 	{
-		cerr << argv[0] << " <mode> <input_file>.csv <output_file>.csv" << endl;
+		cerr << argv[0] << ERROR_ARGC << endl;
 		return 1;
 	}
 
@@ -153,17 +153,17 @@ int main(int argc, char* argv[])
 	ifstream input(argv[2]);
 	ofstream output(argv[3]);
 
-	if (mode == "moore")
+	if (mode == MOORE)
 	{
 		MooreMin(input, output);
 	}
-	else if (mode == "mealy")
+	else if (mode == MEALY)
 	{
 		MealyMin(input, output);
 	}
 	else
 	{
-		cerr << "Некорректный режим. Введите mealy или moore." << endl;
+		cerr << ERROR_MODE << endl;
 		return 1;
 	}
 
