@@ -32,3 +32,15 @@
 *.app
 lab2/minimizaciya/.vs/
 lab2/minimizaciya/out/
+lab2/minimizaciya/x64/
+lab2/minimizaciya/minimizaciya.dir/
+lab2/minimizaciya/CMakeFiles/
+lab2/minimizaciya/ALL_BUILD.vcxproj
+lab2/minimizaciya/ALL_BUILD.vcxproj.filters
+lab2/minimizaciya/cmake_install.cmake
+lab2/minimizaciya/minimizaciya.vcxproj.filters
+lab2/minimizaciya/minimizaciya.vcxproj
+lab2/minimizaciya/CMakeCache.txt
+lab2/minimizaciya/ZERO_CHECK.vcxproj
+lab2/minimizaciya/ZERO_CHECK.vcxproj.filters
+lab2/minimizaciya/Debug/minimizaciya.pdb
