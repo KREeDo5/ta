@@ -24,7 +24,7 @@ Mode ParseMode(const string& mode)
         return Mode::MooreToMealy;
     }
 
-    throw invalid_argument("Invalid type");
+    throw invalid_argument("Invalid mode");
 }
 
 static Args ParseArgs(int argc, char* argv[])
@@ -96,18 +96,18 @@ static void ConvertMooreToMealy(istream& input, ostream& output)
     PrintData(output, mealy.ConvertToCSV());
 }
 
-static void Convert(const string& inputFileName, const string& outputFileName, Mode type)
+static void Convert(const string& inputFileName, const string& outputFileName, Mode mode)
 {
     ifstream input(inputFileName);
     ofstream output(outputFileName);
 
     CheckFileOpen(input, output);
 
-    if (type == Mode::MealyToMoore)
+    if (mode == Mode::MealyToMoore)
     {
         ConvertMealyToMoore(input, output);
     }
-    if (type == Mode::MooreToMealy)
+    if (mode == Mode::MooreToMealy)
     {
         ConvertMooreToMealy(input, output);
     }
