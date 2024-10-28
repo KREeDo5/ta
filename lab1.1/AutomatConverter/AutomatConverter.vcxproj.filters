@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Repos\VOLGATECH_WORK\TA\lab1.1\AutomatConverter\AutomatConverter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Repos\VOLGATECH_WORK\TA\lab1.1\AutomatConverter\CMealy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Repos\VOLGATECH_WORK\TA\lab1.1\AutomatConverter\CMoore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Repos\VOLGATECH_WORK\TA\lab1.1\AutomatConverter\utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Repos\VOLGATECH_WORK\TA\lab1.1\AutomatConverter\AutomatConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Repos\VOLGATECH_WORK\TA\lab1.1\AutomatConverter\CMealy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Repos\VOLGATECH_WORK\TA\lab1.1\AutomatConverter\CMoore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Repos\VOLGATECH_WORK\TA\lab1.1\AutomatConverter\utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Repos\VOLGATECH_WORK\TA\lab1.1\AutomatConverter\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{53FCE4A1-2BE8-36B5-BCF7-370516A72634}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{FFF1C714-BB50-3AFB-BA70-CFFFC307F7DA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
