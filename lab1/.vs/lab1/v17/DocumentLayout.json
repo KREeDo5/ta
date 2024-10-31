@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\lab1.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:lab1.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\lab1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:lab1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMoore.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CMoore.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMealy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -19,16 +15,16 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CMoore.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMoore.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CMoore.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMealy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CMealy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\lab1.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:lab1.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\lab1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:lab1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,8 +34,36 @@
       "DocumentGroups": [
         {
           "DockedWidth": 282,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "lab1.h",
+              "DocumentMoniker": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\lab1.h",
+              "RelativeDocumentMoniker": "lab1.h",
+              "ToolTip": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\lab1.h",
+              "RelativeToolTip": "lab1.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-31T16:53:43.988Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "lab1.cpp",
+              "DocumentMoniker": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\lab1.cpp",
+              "RelativeDocumentMoniker": "lab1.cpp",
+              "ToolTip": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\lab1.cpp",
+              "RelativeToolTip": "lab1.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-29T16:43:02.193Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -47,51 +71,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "lab1.h",
-              "DocumentMoniker": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\lab1.h",
-              "RelativeDocumentMoniker": "lab1.h",
-              "ToolTip": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\lab1.h",
-              "RelativeToolTip": "lab1.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-31T16:53:43.988Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CMoore.h",
-              "DocumentMoniker": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMoore.h",
-              "RelativeDocumentMoniker": "CMoore.h",
-              "ToolTip": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMoore.h",
-              "RelativeToolTip": "CMoore.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-31T16:44:44.821Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "CMoore.cpp",
               "DocumentMoniker": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMoore.cpp",
               "RelativeDocumentMoniker": "CMoore.cpp",
               "ToolTip": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMoore.cpp",
               "RelativeToolTip": "CMoore.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFUAAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-31T16:44:42.477Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "CMealy.cpp",
               "DocumentMoniker": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMealy.cpp",
               "RelativeDocumentMoniker": "CMealy.cpp",
               "ToolTip": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMealy.cpp",
               "RelativeToolTip": "CMealy.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAIUAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-31T16:44:40.639Z",
               "EditorCaption": ""
@@ -99,40 +97,28 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "CMealy.h",
-              "DocumentMoniker": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMealy.h",
-              "RelativeDocumentMoniker": "CMealy.h",
-              "ToolTip": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMealy.h",
-              "RelativeToolTip": "CMealy.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAvAAAA",
+              "Title": "CMoore.h",
+              "DocumentMoniker": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMoore.h",
+              "RelativeDocumentMoniker": "CMoore.h",
+              "ToolTip": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMoore.h",
+              "RelativeToolTip": "CMoore.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-31T16:44:37.033Z",
+              "WhenOpened": "2024-10-31T16:44:44.821Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "lab1.cpp",
-              "DocumentMoniker": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\lab1.cpp",
-              "RelativeDocumentMoniker": "lab1.cpp",
-              "ToolTip": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\lab1.cpp",
-              "RelativeToolTip": "lab1.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-29T16:43:02.193Z",
+              "Title": "CMealy.h",
+              "DocumentMoniker": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMealy.h",
+              "RelativeDocumentMoniker": "CMealy.h",
+              "ToolTip": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMealy.h",
+              "RelativeToolTip": "CMealy.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-31T16:44:37.033Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CMakeLists.txt",
-              "DocumentMoniker": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMakeLists.txt",
-              "RelativeDocumentMoniker": "CMakeLists.txt",
-              "ToolTip": "D:\\Repos\\VOLGATECH_WORK\\TA\\lab1\\CMakeLists.txt",
-              "RelativeToolTip": "CMakeLists.txt",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-09-29T16:27:58.289Z"
             }
           ]
         }
