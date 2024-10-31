@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Repos\VOLGATECH_WORK\TA\lab1\CMakeFiles\aa191a1a9a2cfe2988a1b2bd4c0a0c65\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{C85FD6B4-CCC5-31ED-9A8F-9A29A32AB232}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

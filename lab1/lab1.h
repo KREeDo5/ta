@@ -10,3 +10,8 @@
 #include <algorithm>
 
 using namespace std;
+
+class MachineConverter {
+public:
+    static void Convert(const string& mode, istream& input, ostream& output);
+};
