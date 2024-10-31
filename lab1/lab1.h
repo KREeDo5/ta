@@ -9,6 +9,9 @@
 #include <Windows.h>
 #include <algorithm>
 
+#include "CMealy.h"
+#include "CMoore.h"
+
 using namespace std;
 
 class MachineConverter {

@@ -1,4 +1,11 @@
 #include "CMealy.h"
+#include <sstream>
+#include <algorithm> // Для использования std::sort
+
+template <typename T>
+typename vector<T>::iterator FindMoveInVector(vector<T>& vec, const T& value) {
+    return find(vec.begin(), vec.end(), value);
+}
 
 vector<string> CMealy::ReadSignals(istream& input) {
     string tempStr;
@@ -111,10 +118,6 @@ void CMealy::Write(ostream& output) {
 }
 
 void CMealy::ConvertToMoore(ostream& output) {
-    vector<string> listOfS = ReadSignals(input);
-    vector<Move> listOfQ;
-    vector<string> listOfX;
-    vector<vector<Move>> table = ReadMealyTable(input, listOfX, listOfQ);
     bool foundInListOfQ = false;
     for (const auto& move : listOfQ) {
         if (move.s == listOfS[0]) {
@@ -123,11 +126,11 @@ void CMealy::ConvertToMoore(ostream& output) {
         }
     }
     if (!foundInListOfQ) {
-        AddInitialState(listOfQ, listOfS[0], "-");
+        AddInitialState(listOfS[0], "-");
     }
     sort(listOfQ.begin(), listOfQ.end(), [](const Move& a, const Move& b) {
         return a.s < b.s;
     });
 
-    WriteMooreTable(output, listOfQ, listOfX, table, listOfS);
+    WriteMooreTable(output);
 }

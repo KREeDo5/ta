@@ -311,6 +311,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClCompile Include="D:\Repos\VOLGATECH_WORK\TA\lab1\lab1.cpp" />
     <ClInclude Include="D:\Repos\VOLGATECH_WORK\TA\lab1\lab1.h" />
+    <ClCompile Include="D:\Repos\VOLGATECH_WORK\TA\lab1\CMealy.cpp" />
+    <ClInclude Include="D:\Repos\VOLGATECH_WORK\TA\lab1\CMealy.h" />
+    <ClCompile Include="D:\Repos\VOLGATECH_WORK\TA\lab1\CMoore.cpp" />
+    <ClInclude Include="D:\Repos\VOLGATECH_WORK\TA\lab1\CMoore.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\Repos\VOLGATECH_WORK\TA\lab1\ZERO_CHECK.vcxproj">

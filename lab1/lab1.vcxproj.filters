@@ -4,9 +4,21 @@
     <ClCompile Include="D:\Repos\VOLGATECH_WORK\TA\lab1\lab1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\Repos\VOLGATECH_WORK\TA\lab1\CMealy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Repos\VOLGATECH_WORK\TA\lab1\CMoore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\Repos\VOLGATECH_WORK\TA\lab1\lab1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Repos\VOLGATECH_WORK\TA\lab1\CMealy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Repos\VOLGATECH_WORK\TA\lab1\CMoore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,6 @@
 #include "CMoore.h"
 #include "CMealy.h"
+#include <sstream>
 
 vector<string> CMoore::ReadSignals(istream& input) {
     string tempStr;

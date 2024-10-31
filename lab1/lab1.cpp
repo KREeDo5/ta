@@ -1,6 +1,4 @@
 ﻿#include "lab1.h"
-#include "CMealy.h"
-#include "CMoore.h"
 
 void MachineConverter::Convert(const string& mode, istream& input, ostream& output) {
     if (mode == "moore-to-mealy") {

@@ -9,6 +9,10 @@ using namespace std;
 struct Move {
     string s;
     string y;
+
+    bool operator==(const Move& other) const {
+        return s == other.s && y == other.y;
+    }
 };
 
 class CMealy {

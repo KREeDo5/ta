@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "CMealy.h" // Добавляем включение заголовочного файла CMealy.h
+#include "CMealy.h"
 
 using namespace std;
 
