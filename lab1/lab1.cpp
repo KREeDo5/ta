@@ -1,19 +1,5 @@
 ﻿#include "lab1.h"
 
-void MachineConverter::MinimizeMealy(istream& input, ostream& output)
-{
-    CMealy mealy;
-    mealy.Read(input);
-    mealy.Minimize(output);
-}
-
-void MachineConverter::MinimizeMoore(istream& input, ostream& output)
-{
-    CMoore moore;
-    moore.Read(input);
-    moore.Minimize(output);
-}
-
 void MachineConverter::Convert(const string& mode, istream& input, ostream& output)
 {
     if (mode == "moore-to-mealy")
@@ -30,11 +16,15 @@ void MachineConverter::Convert(const string& mode, istream& input, ostream& outp
     }
     else if (mode == "mealy-minimize")
     {
-        MinimizeMealy(input, output);
+        CMealy mealy;
+        mealy.Read(input);
+        mealy.Minimize(output);
     }
     else if (mode == "moore-minimize")
     {
-        MinimizeMoore(input, output);
+        CMoore moore;
+        moore.Read(input);
+        moore.Minimize(output);
     }
     else
     {

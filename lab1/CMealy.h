@@ -40,5 +40,5 @@ class CMealy
         void Read(istream& input);
         void Write(ostream& output);
         void ConvertToMoore(ostream& output);
-        void Minimize();
+        void Minimize(ostream& output);
 };
