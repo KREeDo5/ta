@@ -3,19 +3,21 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
+
 #include "CMealy.h"
+#include "CMinimizer.h"
 
 using namespace std;
 
-class CMoore {
-public:
-    void Read(istream& input);
-    void Write(ostream& output);
-    void ConvertToMealy(ostream& output);
+class CMoore
+{
+    private:
+        vector<string> ReadSignals(istream& input);
 
-private:
-    vector<string> listOfY;
-    vector<vector<string>> table;
-
-    vector<string> ReadSignals(istream& input);
+    public:
+        void Read(istream& input);
+        void Write(ostream& output);
+        void ConvertToMealy(ostream& output);
+        void Minimize();
 };

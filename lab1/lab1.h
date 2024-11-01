@@ -11,10 +11,16 @@
 
 #include "CMealy.h"
 #include "CMoore.h"
+#include "CMinimizer.h"
 
 using namespace std;
 
-class MachineConverter {
-public:
-    static void Convert(const string& mode, istream& input, ostream& output);
+class MachineConverter
+{
+    private:
+        static void MinimizeMealy(istream& input, ostream& output);
+        static void MinimizeMoore(istream& input, ostream& output);
+
+    public:
+        static void Convert(const string& mode, istream& input, ostream& output);
 };
