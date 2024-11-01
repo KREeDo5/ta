@@ -2,9 +2,9 @@
 #include <algorithm>
 #include <string>
 
-std::string CreateUniqueStr(const std::vector<std::string>& uniques)
+string CreateUniqueStr(const vector<string>& uniques)
 {
-    std::string result;
+    string result;
     for (const auto& unique : uniques)
     {
         result += unique;
@@ -19,7 +19,7 @@ void CMinimizer::MealyMinimizer(CMealy &mealy)
     auto states = SelectState(transitions, mealy.GetPaths().size(), statesOld.size());
     auto uniques = SelectUniqueState(states);
 
-    std::string equivalentString;
+    string equivalentString;
     auto uniqueString = CreateUniqueStr(uniques);
     while (equivalentString != uniqueString)
     {
@@ -30,26 +30,26 @@ void CMinimizer::MealyMinimizer(CMealy &mealy)
         uniqueString = CreateUniqueStr(uniques);
     }
 
-    std::vector<std::string> newState;
-    std::vector<int> indexVec;
+    vector<string> newState;
+    vector<int> indexVec;
     for (int i = 0; i < uniques.size(); ++i)
     {
         auto unique = uniques[i];
-        if (std::find(newState.begin(), newState.end(), unique) == newState.end())
+        if (find(newState.begin(), newState.end(), unique) == newState.end())
         {
             newState.push_back(unique);
             indexVec.push_back(i);
         }
     }
 
-    std::vector<std::vector<Move>> newTransitions;
+    vector<vector<Move>> newTransitions;
     for (int i = 0; i < mealy.GetPaths().size(); ++i)
     {
-        std::vector<Move> newTransitionLine;
+        vector<Move> newTransitionLine;
         for (const auto indexCurrent: indexVec)
         {
             auto item = transitions[i][indexCurrent];
-            if (auto it = std::find(statesOld.begin(), statesOld.end(), item.s); it != statesOld.end())
+            if (auto it = find(statesOld.begin(), statesOld.end(), item.s); it != statesOld.end())
             {
                 auto index = it - statesOld.begin();
                 newTransitionLine.push_back({uniques[index], item.y});
@@ -68,7 +68,7 @@ void CMinimizer::MooreMinimizer(CMoore &moore)
     auto statesOld = moore.GetStates();
     auto uniques = SelectUniqueState(moore.GetOutput());
 
-    std::string equivalentString;
+    string equivalentString;
     auto uniqueString = CreateUniqueStr(uniques);
     while (equivalentString != uniqueString)
     {
@@ -79,25 +79,25 @@ void CMinimizer::MooreMinimizer(CMoore &moore)
         uniqueString = CreateUniqueStr(uniques);
     }
 
-    std::vector<std::string> newState;
-    std::vector<int> indexVec;
+    vector<string> newState;
+    vector<int> indexVec;
     for (int i = 0; i < uniques.size(); ++i)
     {
         auto unique = uniques[i];
-        if (std::find(newState.begin(), newState.end(), unique) == newState.end())
+        if (find(newState.begin(), newState.end(), unique) == newState.end())
         {
             newState.push_back(unique);
             indexVec.push_back(i);
         }
     }
 
-    std::vector<std::vector<std::string>> newTransitions;
+    vector<vector<string>> newTransitions;
     for (int i = 0; i < moore.GetPaths().size(); ++i)
     {
-        std::vector<std::string> newTransitionLine;
+        vector<string> newTransitionLine;
         for (const auto indexCurrent: indexVec) {
             auto item = transitions[i][indexCurrent];
-            if (auto it = std::find(statesOld.begin(), statesOld.end(), item); it != statesOld.end())
+            if (auto it =find(statesOld.begin(), statesOld.end(), item); it != statesOld.end())
             {
                 auto index = it - statesOld.begin();
                 newTransitionLine.push_back(uniques[index]);
@@ -110,10 +110,10 @@ void CMinimizer::MooreMinimizer(CMoore &moore)
     }
 
     auto output = moore.GetOutput();
-    std::vector<std::string> newOutput;
+    vector<string> newOutput;
     for (const auto &state: newState)
     {
-        if (auto it = std::find(uniques.begin(), uniques.end(), state); it != newState.end())
+        if (auto it = find(uniques.begin(), uniques.end(), state); it != newState.end())
         {
             auto index = it - uniques.begin();
             newOutput.push_back(output[index]);
@@ -125,13 +125,13 @@ void CMinimizer::MooreMinimizer(CMoore &moore)
     moore.SetTransitions(newTransitions);
 }
 
-std::vector<std::string> CMinimizer::SelectState(const std::vector<std::vector<Move>> &state, size_t rowCount, size_t columnCount)
+vector<string> CMinimizer::SelectState(const vector<vector<Move>> &state, size_t rowCount, size_t columnCount)
 {
-    std::vector<std::string> result;
+    vector<string> result;
 
     for (int i = 0; i < columnCount; ++i)
     {
-        std::string columnState;
+        string columnState;
         for (int j = 0; j < rowCount; ++j)
         {
             columnState += state[j][i].y;
@@ -142,18 +142,18 @@ std::vector<std::string> CMinimizer::SelectState(const std::vector<std::vector<M
     return result;
 }
 
-std::vector<std::string> CMinimizer::SelectUniqueState(const std::vector<std::string> &data)
+vector<string> CMinimizer::SelectUniqueState(const vector<string> &data)
 {
-    std::vector<std::string> result;
-    std::string newPrefix(1, data[0][0] == 'A' ? 'B' : 'A');
+    vector<string> result;
+    string newPrefix(1, data[0][0] == 'A' ? 'B' : 'A');
 
-    std::vector<std::string> uniques;
-    std::vector<std::string> newResStates;
+    vector<string> uniques;
+    vector<string> newResStates;
     for (const auto &item: data) {
-        if (auto it = std::find(uniques.begin(), uniques.end(), item); it == uniques.end())
+        if (auto it = find(uniques.begin(), uniques.end(), item); it == uniques.end())
         {
             uniques.push_back(item);
-            auto str = newPrefix + std::to_string(uniques.size());
+            auto str = newPrefix + to_string(uniques.size());
             newResStates.push_back(str);
             result.push_back(str);
         } else
@@ -166,18 +166,18 @@ std::vector<std::string> CMinimizer::SelectUniqueState(const std::vector<std::st
     return result;
 }
 
-std::vector<std::vector<std::string>> CMinimizer::CreateNewTransitions(const CMealy &mealy, const std::vector<std::string> &data)
+vector<vector<string>> CMinimizer::CreateNewTransitions(const CMealy &mealy, const vector<string> &data)
 {
     auto transitions = mealy.GetTransitions();
     auto states = mealy.GetStates();
 
-    std::vector<std::vector<std::string>> result;
+    vector<vector<string>> result;
     for (auto &transition: transitions)
     {
-        std::vector<std::string> line;
+        vector<string> line;
         for (auto &j: transition)
         {
-            if (auto it = std::find(states.begin(), states.end(), j.s); it != states.end())
+            if (auto it = find(states.begin(), states.end(), j.s); it != states.end())
             {
                 auto index = it - states.begin();
                 line.push_back(data[index]);
@@ -188,13 +188,13 @@ std::vector<std::vector<std::string>> CMinimizer::CreateNewTransitions(const CMe
     return result;
 }
 
-std::vector<std::string> CMinimizer::SelectState(const std::vector<std::vector<std::string>> &transitions, size_t rowCount, size_t columnCount)
+vector<string> CMinimizer::SelectState(const vector<vector<string>> &transitions, size_t rowCount, size_t columnCount)
 {
-    std::vector<std::string> result;
+    vector<string> result;
 
     for (int i = 0; i < columnCount; ++i)
     {
-        std::string columnState;
+        string columnState;
         for (int j = 0; j < rowCount; ++j)
         {
             columnState += transitions[j][i];
@@ -206,20 +206,20 @@ std::vector<std::string> CMinimizer::SelectState(const std::vector<std::vector<s
     return result;
 }
 
-std::vector<std::string> CMinimizer::SelectUniqueState(const std::vector<std::string> &data, const std::vector<std::string> &oldUnique)
+vector<string> CMinimizer::SelectUniqueState(const vector<string> &data, const vector<string> &oldUnique)
 {
-    std::vector<std::string> result;
-    std::string newPrefix(1, oldUnique[0][0] == 'A' ? 'B' : 'A');
+    vector<string> result;
+    string newPrefix(1, oldUnique[0][0] == 'A' ? 'B' : 'A');
 
-    std::vector<std::string> newResStates;
-    std::vector<std::string> newStrData;
+    vector<string> newResStates;
+    vector<string> newStrData;
     for (int i = 0; i < data.size(); ++i)
     {
         auto newStr = oldUnique[i] + data[i];
-        if (auto it = std::find(newStrData.begin(), newStrData.end(), newStr); it == newStrData.end())
+        if (auto it = find(newStrData.begin(), newStrData.end(), newStr); it == newStrData.end())
         {
             newStrData.push_back(newStr);
-            auto str = newPrefix + std::to_string(newStrData.size());
+            auto str = newPrefix + to_string(newStrData.size());
             newResStates.push_back(str);
             result.push_back(str);
         } else
@@ -232,18 +232,18 @@ std::vector<std::string> CMinimizer::SelectUniqueState(const std::vector<std::st
     return result;
 }
 
-std::vector<std::vector<std::string>> CMinimizer::CreateNewTransitions(const CMoore &moore, const std::vector<std::string> &data)
+vector<vector<string>> CMinimizer::CreateNewTransitions(const CMoore &moore, const vector<string> &data)
 {
     auto transitions = moore.GetTransitions();
     auto states = moore.GetStates();
 
-    std::vector<std::vector<std::string>> result;
+    vector<vector<string>> result;
     for (auto &transition: transitions)
     {
-        std::vector<std::string> line;
+        vector<string> line;
         for (auto &j: transition)
         {
-            if (auto it = std::find(states.begin(), states.end(), j); it != states.end())
+            if (auto it = find(states.begin(), states.end(), j); it != states.end())
             {
                 auto index = it - states.begin();
                 line.push_back(data[index]);

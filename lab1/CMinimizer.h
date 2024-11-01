@@ -3,15 +3,26 @@
 #include "CMealy.h"
 #include "CMoore.h"
 
+struct Move
+{
+    string s;
+    string y;
+
+    bool operator==(const Move& other) const
+    {
+        return s == other.s && y == other.y;
+    }
+};
+
 class CMinimizer
 {
     private:
-        static std::vector<std::string> SelectState(const std::vector<std::vector<Move>> &data, size_t rowCount, size_t columnCount);
-        static std::vector<std::string> SelectState(const std::vector<std::vector<std::string>> &transitions, size_t rowCount, size_t columnCount);
-        static std::vector<std::string> SelectUniqueState(const std::vector<std::string> &data);
-        static std::vector<std::string> SelectUniqueState(const std::vector<std::string> &data, const std::vector<std::string> &oldUnique);
-        static std::vector<std::vector<std::string>> CreateNewTransitions(const CMealy &mealy, const std::vector<std::string> &data);
-        static std::vector<std::vector<std::string>> CreateNewTransitions(const CMoore &moore, const std::vector<std::string> &data);
+        static vector<string> SelectState(const vector<vector<Move>> &data, size_t rowCount, size_t columnCount);
+        static vector<string> SelectState(const vector<vector<string>> &transitions, size_t rowCount, size_t columnCount);
+        static vector<string> SelectUniqueState(const vector<string> &data);
+        static vector<string> SelectUniqueState(const vector<string> &data, const vector<string> &oldUnique);
+        static vector<vector<string>> CreateNewTransitions(const CMealy &mealy, const vector<string> &data);
+        static vector<vector<string>> CreateNewTransitions(const CMoore &moore, const vector<string> &data);
 
     public:
         static void MealyMinimizer(CMealy &mealy);
