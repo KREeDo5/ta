@@ -1,35 +1,37 @@
 #pragma once
-
+#include "CMoore.h"
+#include "utils.h"
+#include <algorithm>
 #include <iostream>
-#include <vector>
+#include <map>
 #include <string>
+#include <vector>
 
-using namespace std;
-
-struct Move {
-    string s;
-    string y;
-
-    bool operator==(const Move& other) const {
-        return s == other.s && y == other.y;
-    }
+struct SMealyItem
+{
+    std::string to;
+    std::string out;
 };
 
-class CMealy {
-public:
-    void Read(istream& input);
-    void Write(ostream& output);
-    void ConvertToMoore(ostream& output);
+class CMealy
+{
+    public:
+        CMealy() = default;
+        void FromCSVFromStream(std::istream& istream);
+        std::string ConvertToCSV();
 
-private:
-    vector<string> listOfS;
-    vector<Move> listOfQ;
-    vector<string> listOfX;
-    vector<vector<Move>> table;
+        void SetStates(std::vector<std::string>& data);
+        void SetTransitions(std::vector<std::vector<SMealyItem>>& data);
 
-    vector<string> ReadSignals(istream& input);
-    vector<vector<Move>> ReadMealyTable(istream& input);
-    void AddInitialState(const string& initialState, const string& defaultOutput);
-    void WriteMooreTable(ostream& output);
-    int GetMoveIndex(const Move& move) const;
+        [[nodiscard]] std::vector<std::string> GetStates() const;
+        [[nodiscard]] std::vector<std::string> GetPaths() const;
+        [[nodiscard]] std::vector<std::vector<SMealyItem>> GetTransitions() const;
+
+    private:
+        void ReadStatesCSV(const std::string& line);
+        void ReadTransitionsCSV(const std::string& line);
+
+        std::vector<std::string> m_states;
+        std::vector<std::string> m_paths;
+        std::vector<std::vector<SMealyItem>> m_transitions;
 };

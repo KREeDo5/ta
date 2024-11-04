@@ -1,92 +1,130 @@
 #include "CMoore.h"
-#include "CMealy.h"
-#include <sstream>
 
-vector<string> CMoore::ReadSignals(istream& input) {
-    string tempStr;
-    vector<string> listOfY;
-    string item;
-
-    getline(input, tempStr);
-    size_t pos = tempStr.find(';');
-    if (pos != string::npos) {
-        tempStr = tempStr.substr(pos + 1);
-    }
-
-    stringstream ss(tempStr);
-
-    while (getline(ss, item, ';')) {
-        listOfY.push_back(item);
-    }
-    return listOfY;
-}
-
-void CMoore::Read(istream& input) {
-    listOfY = ReadSignals(input);
-    string tempStr;
-    getline(input, tempStr);
-    while (getline(input, tempStr)) {
-        vector<string> row;
-        stringstream ss(tempStr);
-        string item;
-        while (getline(ss, item, ';')) {
-            row.push_back(item);
+void CMoore::FromCSVFromStream(std::istream& istream)
+{
+    int index = 0;
+    std::string line;
+    while (std::getline(istream, line))
+    {
+        if (index == 0)
+        {
+            ReadOutputsCSV(line);
+            index++;
         }
-        table.push_back(row);
+        else if (index == 1)
+        {
+            ReadStatesCSV(line);
+            index++;
+        }
+        else
+        {
+            ReadTransitionsCSV(line);
+        }
     }
 }
 
-void CMoore::Write(ostream& output) {
-    output << ";";
-    for (const auto& y : listOfY) {
-        output << y << ";";
+std::string CMoore::ConvertToCSV()
+{
+    std::string csv;
+    for (const auto& out : m_output)
+    {
+        csv.append(";" + out);
     }
-    output << endl;
-
-    for (const auto& row : table) {
-        for (const auto& item : row) {
-            output << item << ";";
+    csv.append("\n");
+    for (const auto& st : m_states)
+    {
+        csv.append(";" + st);
+    }
+    csv.append("\n");
+    for (int i = 0; i < m_paths.size(); ++i)
+    {
+        csv.append(m_paths[i]);
+        for (auto& j : m_transitions[i])
+        {
+            csv.append(";" + j);
         }
-        output << endl;
+        csv.append("\n");
+    }
+    return csv;
+}
+
+void CMoore::ReadOutputsCSV(const std::string& line)
+{
+    std::vector<std::string> outputs;
+    Split(line, ';', outputs);
+    if (line[line.size() - 1] == ';')
+    {
+        outputs.emplace_back("");
+    }
+    for (int i = 1; i < outputs.size(); ++i)
+    {
+        m_output.push_back(outputs[i]);
     }
 }
 
-void CMoore::ConvertToMealy(ostream& output) {
-    output << ";";
-    for (const auto& y : listOfY) {
-        output << y << ";";
+void CMoore::ReadStatesCSV(const std::string& line)
+{
+    std::vector<std::string> states;
+    Split(line, ';', states);
+    if (line[line.size() - 1] == ';')
+    {
+        states.emplace_back("");
     }
-    output << endl;
-
-    for (const auto& row : table) {
-        for (const auto& item : row) {
-            output << item << ";";
-        }
-        output << endl;
+    for (int i = 1; i < states.size(); ++i)
+    {
+        m_states.push_back(states[i]);
     }
+}
 
-    string tempStr;
-    for (const auto& row : table) {
-        size_t pos = 0;
-        int count = 0;
-        size_t yIndex = 0;
-
-        for (const auto& item : row) {
-            if (count > 0 && yIndex < listOfY.size()) {
-                tempStr += item + "/" + listOfY[yIndex] + ";";
-                yIndex++;
-            }
-            else {
-                tempStr += item + ";";
-            }
-            count++;
-        }
-
-        if (yIndex < listOfY.size()) {
-            tempStr += "/" + listOfY[yIndex];
-        }
-
-        output << tempStr << endl;
-        tempStr.clear();
+void CMoore::ReadTransitionsCSV(const std::string& line)
+{
+    std::vector<std::string> transitions;
+    Split(line, ';', transitions);
+    if (line[line.size() - 1] == ';')
+    {
+        transitions.emplace_back("");
     }
+    auto path = transitions[0];
+    m_paths.push_back(path);
+    std::vector<std::string> transitionLine;
+    for (int i = 1; i < transitions.size(); ++i)
+    {
+        transitionLine.push_back(transitions[i]);
+    }
+    m_transitions.push_back(transitionLine);
+}
+
+void CMoore::SetStates(std::vector<std::string>& data)
+{
+    m_states = data;
+}
+
+void CMoore::SetOutput(std::vector<std::string>& data)
+{
+    m_output = data;
+}
+
+void CMoore::SetTransitions(std::vector<std::vector<std::string>>& data)
+{
+    m_transitions = data;
+}
+
+std::vector<std::string> CMoore::GetStates() const
+{
+    return m_states;
+}
+
+std::vector<std::string> CMoore::GetPaths() const
+{
+    return m_paths;
+}
+
+std::vector<std::string> CMoore::GetOutput() const
+{
+    return m_output;
+}
+
+std::vector<std::vector<std::string>> CMoore::GetTransitions() const
+{
+    return m_transitions;
 }

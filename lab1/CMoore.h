@@ -1,21 +1,35 @@
 #pragma once
-
-#include <iostream>
-#include <vector>
-#include <string>
 #include "CMealy.h"
+#include "utils.h"
+#include <algorithm>
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
 
-using namespace std;
+class CMoore
+{
+    public:
+        CMoore() = default;
+        void FromCSVFromStream(std::istream& istream);
+        std::string ConvertToCSV();
 
-class CMoore {
-public:
-    void Read(istream& input);
-    void Write(ostream& output);
-    void ConvertToMealy(ostream& output);
+        void SetStates(std::vector<std::string>& data);
+        void SetOutput(std::vector<std::string>& data);
+        void SetTransitions(std::vector<std::vector<std::string>>& data);
 
-private:
-    vector<string> listOfY;
-    vector<vector<string>> table;
+        [[nodiscard]] std::vector<std::string> GetStates() const;
+        [[nodiscard]] std::vector<std::string> GetPaths() const;
+        [[nodiscard]] std::vector<std::string> GetOutput() const;
+        [[nodiscard]] std::vector<std::vector<std::string>> GetTransitions() const;
 
-    vector<string> ReadSignals(istream& input);
+    private:
+        void ReadOutputsCSV(const std::string& line);
+        void ReadStatesCSV(const std::string& line);
+        void ReadTransitionsCSV(const std::string& line);
+
+        std::vector<std::string> m_states;
+        std::vector<std::string> m_paths;
+        std::vector<std::string> m_output;
+        std::vector<std::vector<std::string>> m_transitions;
 };
