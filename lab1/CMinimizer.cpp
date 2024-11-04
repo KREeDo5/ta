@@ -103,7 +103,7 @@ void CMinimizer::MooreMinimizer(CMoore& moore)
     std::vector<std::string> newOutput;
     for (const auto& state : newState)
     {
-        if (auto it = std::find(uniques.begin(), uniques.end(), state); it != newState.end())
+        if (auto it = std::find(uniques.begin(), uniques.end(), state); it != uniques.end())
         {
             auto index = it - uniques.begin();
             newOutput.push_back(output[index]);
