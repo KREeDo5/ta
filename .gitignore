@@ -34,3 +34,16 @@ lab1/x64/Debug/ZERO_CHECK/
 lab1/lab1.dir/Debug/lab1.tlog/
 lab1/CMakeFiles/
 lab1/.vs/
+lab3/regular/x64/
+lab3/regular/regular.dir/
+lab3/regular/out/
+lab3/regular/CMakeFiles/
+lab3/regular/.vs/
+lab3/regular/ZERO_CHECK.vcxproj.filters
+lab3/regular/ZERO_CHECK.vcxproj
+lab3/regular/regular.vcxproj.filters
+lab3/regular/regular.vcxproj
+lab3/regular/cmake_install.cmake
+lab3/regular/ALL_BUILD.vcxproj
+lab3/regular/ALL_BUILD.vcxproj.filters
+lab3/regular/Debug/regular.pdb
