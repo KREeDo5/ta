@@ -1,15 +1,18 @@
 #include "Grammar.h"
 #include <sstream>
 
+// Функция для парсинга правил грамматики из входного потока
 std::map<std::string, std::set<std::string>> ParseRules(std::istream& in)
 {
 	std::map<std::string, std::set<std::string>> rules;
+	// Чтение каждой строки из входного потока
 	for (std::string line; std::getline(in, line);)
 	{
 		std::istringstream iss(line);
 		std::string source;
 		std::set<std::string> destinations;
 		iss >> source;
+		// Парсинг всех правых частей правила
 		while (!iss.eof())
 		{
 			std::string separator;
@@ -24,11 +27,13 @@ std::map<std::string, std::set<std::string>> ParseRules(std::istream& in)
 	return rules;
 }
 
+// Вспомогательная функция для парсинга правой части грамматического правила
 static std::tuple<std::string, std::string> ParseGrammarRightSide(const std::string& rightSide)
 {
 	std::string to;
 	std::string signal;
 
+	// Разделение правой части на символы и сигналы
 	for (char ch : rightSide)
 	{
 		if (ch >= 'A' && ch <= 'Z')
@@ -44,15 +49,18 @@ static std::tuple<std::string, std::string> ParseGrammarRightSide(const std::str
 	return { to, signal };
 }
 
+// Функция для построения графа левой грамматики на основе правил
 CGraph<std::string, std::string> BuildLeftGrammarGraph(const std::map<std::string, std::set<std::string>>& rules)
 {
 	CGraph<std::string, std::string> graph;
 
 	static const std::string startNodeName = "Start";
 
+	// Обработка каждого правила грамматики
 	for (const auto& rule : rules)
 	{
 		const auto& to = rule.first;
+		// Обработка каждой правой части правила
 		for (const auto& rightSide : rule.second)
 		{
 			std::string from;
@@ -69,15 +77,18 @@ CGraph<std::string, std::string> BuildLeftGrammarGraph(const std::map<std::strin
 	return graph;
 }
 
+// Функция для построения графа правой грамматики на основе правил
 CGraph<std::string, std::string> BuildRightGrammarGraph(const std::map<std::string, std::set<std::string>>& rules)
 {
 	CGraph<std::string, std::string> graph;
 
 	static const std::string lastNodeName = "Last";
 
+	// Обработка каждого правила грамматики
 	for (const auto& rule : rules)
 	{
 		const auto& from = rule.first;
+		// Обработка каждой правой части правила
 		for (const auto& rightSide : rule.second)
 		{
 			std::string to;
