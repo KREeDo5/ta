@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 
+// Функция для экспорта графа в таблицу CSV
 std::vector<std::vector<std::string>> DumpGraphToCSVTable(const CGraph<std::string, std::string>& graph);
 
 #endif

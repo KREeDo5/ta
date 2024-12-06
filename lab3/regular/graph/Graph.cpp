@@ -1,7 +1,9 @@
 #include "Graph.h"
 
+// Функция для экспорта графа в таблицу CSV
 std::vector<std::vector<std::string>> DumpGraphToCSVTable(const CGraph<std::string, std::string>& graph)
 {
+	// Создание карты для сопоставления сигналов с их позициями в таблице
 	std::map<std::string, std::size_t> signalToPosition;
 	std::size_t i = 0;
 	for (const auto& signal : graph.GetSignals())
@@ -9,6 +11,7 @@ std::vector<std::vector<std::string>> DumpGraphToCSVTable(const CGraph<std::stri
 		signalToPosition.emplace(signal, i++);
 	}
 
+	// Создание карты для сопоставления узлов с их позициями в таблице
 	std::map<std::string, std::size_t> nodeToPosition;
 	i = 0;
 	for (const auto& node : graph.GetNodes())
@@ -16,11 +19,14 @@ std::vector<std::vector<std::string>> DumpGraphToCSVTable(const CGraph<std::stri
 		nodeToPosition.emplace(node, i++);
 	}
 
+	// Определение размеров таблицы
 	const std::size_t columnSize = graph.GetSignals().size() + 1;
 	const std::size_t rowSize = graph.GetNodes().size() + 1;
 
+	// Создание вектора для хранения столбцов таблицы
 	std::vector<std::vector<std::string>> columns(rowSize);
 
+	// Создание первого столбца с сигналами
 	std::vector<std::string> signalsColumn(columnSize, "");
 	for (const auto& [signal, position] : signalToPosition)
 	{
@@ -28,6 +34,7 @@ std::vector<std::vector<std::string>> DumpGraphToCSVTable(const CGraph<std::stri
 	}
 	columns[0] = signalsColumn;
 
+	// Заполнение таблицы переходами
 	for (const auto& from : graph.GetNodes())
 	{
 		std::vector<std::string> column(columnSize, "");
