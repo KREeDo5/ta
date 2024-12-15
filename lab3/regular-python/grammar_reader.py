@@ -34,5 +34,5 @@ def read_grammar(file_path):
 
         if errors:
             for error in errors:
-                print(f'{error[0]}-handed grammar: Error on line {error[1]}')
+                print(f'{error[0]}-handed grammar: Ошибка в линии {error[1]}')
         return False, None, None
