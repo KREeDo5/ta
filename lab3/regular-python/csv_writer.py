@@ -1,29 +1,31 @@
 import csv
-import networkx as netx
 
 def write_graph_to_csv(graph, file_path):
-        with open(file_path, 'w', newline='\n', encoding='utf-8') as f:
-            writer = csv.writer(f, delimiter=';')
-            ordered_states = list(graph.nodes)
+    with open(file_path, 'w', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file, delimiter=';')
 
-            indexed_states = dict(zip(ordered_states, range(len(ordered_states))))
-            ordered_state_outs = [graph.nodes[node]['out_signal'] for node in ordered_states]
-            ordered_signals = sorted(list(set(netx.get_edge_attributes(graph, 'in_signal').values())))
-            indexed_signals = dict(zip(ordered_signals, range(len(ordered_signals))))
+        states = list(graph.nodes)
+        print("States:", states)
 
-            writer.writerow([''] + ordered_state_outs)
-            writer.writerow([''] + ordered_states)
+        signals = sorted(
+            set(edge_data['in_signal'] for _, _, edge_data in graph.edges(data=True) if edge_data['in_signal'] is not None)
+        )
+        print("Signals:", signals)
 
-            transitions_matrix = [[signal] + [''] * len(ordered_states) for signal in ordered_signals]
+        # Записываем первую строку заголовка с F
+        writer.writerow([''] + ['' for _ in states] + ['F'])
 
-            for from_state, to_state, edge in graph.edges:
-                data = graph.get_edge_data(from_state, to_state, edge)
-                signal = data['in_signal']
-                state = transitions_matrix[indexed_signals[signal]] \
-                    [indexed_states[from_state] + 1]
+        # Записываем вторую строку заголовка с названиями состояний
+        writer.writerow([''] + states)
 
-                transitions_matrix[indexed_signals[signal]] \
-                    [indexed_states[from_state] + 1] = to_state if state == '' else f'{state},{to_state}'
-
-            writer.writerows(transitions_matrix)
-
+        # Для каждого сигнала составляем строку
+        for signal in signals:
+            row = [signal] + ['' for _ in states]
+            for from_state, to_state, edge_data in graph.edges(data=True):
+                if edge_data['in_signal'] == signal:
+                    index = states.index(from_state)
+                    if row[index + 1]:
+                        row[index + 1] += f',{to_state}'
+                    else:
+                        row[index + 1] = to_state
+            writer.writerow(row)
