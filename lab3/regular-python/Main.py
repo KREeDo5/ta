@@ -1,19 +1,27 @@
-from Parse import parse_grammar
-from GrammarToNFA import grammar_to_nfa
-from SaveCSV import save_to_csv
+import sys
+from grammar_reader import read_grammar
+from graph_converter import convert_to_graph
+from csv_writer import write_graph_to_csv
+
 
 def main(input_file, output_file):
-    grammar_type, rules = parse_grammar(input_file)
-    transitions, final_state, state_map = grammar_to_nfa(grammar_type, rules)
-    save_to_csv(transitions, final_state, output_file)
-    print("Состояния:")
-    for non_terminal, state in state_map.items():
-        print(f"{non_terminal} -> {state}")
+    success, grammar, is_left = read_grammar(input_file)
+    if not success:
+        print("Failed to parse grammar")
+        sys.exit(1)
+
+    graph = convert_to_graph(grammar, is_left)
+    print(graph)
+    print("Nodes:", graph.nodes(data=True))
+    print("Edges:", list(graph.edges(data=True)))
+    write_graph_to_csv(graph, output_file)
+    print("Conversion completed!")
+
 
 if __name__ == "__main__":
-    import sys
     if len(sys.argv) != 3:
-        print("Введите: main.exe tests/input.txt tests/output.csv")
-    else:
-        main(sys.argv[1], sys.argv[2])
+        print("python main.py <input_file> <output_file>")
+        sys.exit(1)
 
+    input_file, output_file = sys.argv[1], sys.argv[2]
+    main(input_file, output_file)

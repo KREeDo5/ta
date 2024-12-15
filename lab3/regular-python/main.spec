@@ -2,11 +2,11 @@
 
 
 a = Analysis(
-    ['Main.py'],
+    ['main.py'],
     pathex=[],
     binaries=[],
     datas=[],
-    hiddenimports=['Parse.py', 'GrammarToNFA.py', 'SaveCSV.py'],
+    hiddenimports=['csv_writer', 'grammar_reader', 'graph_converter', 'networkx'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
