@@ -15,13 +15,14 @@ def parse_grammar(text, regex):
         else:
             break
     valid = len(text) == last_position
-    result = matches if len(text) == last_position else last_position
+    result = matches if valid else last_position
     return valid, result
 
 
 def read_grammar(file_path):
     with open(file_path, encoding='utf-8') as file:
         content = file.read()
+        content = content.replace('\t', ' ')
 
         errors = []
         for grammar_type, regex in [("Left", LEFT_GRAMMAR), ("Right", RIGHT_GRAMMAR)]:
