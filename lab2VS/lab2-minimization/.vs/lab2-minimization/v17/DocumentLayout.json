@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Repos\\Github\\taifya\\lab2VS\\lab2-minimization\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F9FDE8C6-6595-4AF4-9D08-716203A18015}|lab2-minimization.vcxproj|D:\\Repos\\Github\\taifya\\lab2VS\\lab2-minimization\\lab2-minimization.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F9FDE8C6-6595-4AF4-9D08-716203A18015}|lab2-minimization.vcxproj|solutionrelative:lab2-minimization.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9FDE8C6-6595-4AF4-9D08-716203A18015}|lab2-minimization.vcxproj|D:\\Repos\\Github\\taifya\\lab2VS\\lab2-minimization\\CMealy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F9FDE8C6-6595-4AF4-9D08-716203A18015}|lab2-minimization.vcxproj|solutionrelative:CMealy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 282,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CMealy.cpp",
+              "DocumentMoniker": "D:\\Repos\\Github\\taifya\\lab2VS\\lab2-minimization\\CMealy.cpp",
+              "RelativeDocumentMoniker": "CMealy.cpp",
+              "ToolTip": "D:\\Repos\\Github\\taifya\\lab2VS\\lab2-minimization\\CMealy.cpp",
+              "RelativeToolTip": "CMealy.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-09T11:26:42.295Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "lab2-minimization.cpp",
+              "DocumentMoniker": "D:\\Repos\\Github\\taifya\\lab2VS\\lab2-minimization\\lab2-minimization.cpp",
+              "RelativeDocumentMoniker": "lab2-minimization.cpp",
+              "ToolTip": "D:\\Repos\\Github\\taifya\\lab2VS\\lab2-minimization\\lab2-minimization.cpp",
+              "RelativeToolTip": "lab2-minimization.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-09T11:23:33.194Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
