@@ -1,7 +1,0 @@
-﻿cmake_minimum_required (VERSION 3.8)
-
-project (lab1)
-
-set(CMAKE_CXX_STANDARD 20)
-
-add_executable (lab1 lab1.cpp utils.cpp utils.h CMealy.cpp CMealy.h CMoore.cpp CMoore.h CMinimizer.cpp CMinimizer.h)
