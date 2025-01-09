@@ -34,3 +34,4 @@ lab1/x64/Debug/ZERO_CHECK/
 lab1/lab1.dir/Debug/lab1.tlog/
 lab1/CMakeFiles/
 lab1/.vs/
+lab1-without-cmake/main/.vs/
