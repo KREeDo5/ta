@@ -19,4 +19,7 @@ def read_graph_from_csv(file_path):
                     for to_state in transitions.split(','):
                         graph.add_edge(from_state, to_state, in_signal=signal)
 
+        start_state = states[0]  # Пока что первое состояние является начальным
+        graph.graph['start'] = start_state
+
     return graph
