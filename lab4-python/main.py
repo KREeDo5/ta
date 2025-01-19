@@ -5,6 +5,7 @@ from csv_writer import write_graph_to_csv
 
 def main(input_file, output_file):
     graph = read_graph_from_csv(input_file)
+    print("Graph:", graph)
     dfa_graph = convert_to_dfa(graph)
     write_graph_to_csv(dfa_graph, output_file)
 
