@@ -27,7 +27,6 @@
 *.lib
 
 # Executables
-*.exe
 *.out
 *.app
 lab1/x64/Debug/ZERO_CHECK/
