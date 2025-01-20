@@ -12,9 +12,17 @@ def write_graph_to_csv(graph, file_path):
         )
         print("Signals:", signals)
 
-        writer.writerow([''] + ['' for _ in states] + ['F'])
+        # Определение финальных состояний
+        final_states = [state for state in states if graph.nodes[state].get('is_final', False)]
+        print("Final States:", final_states)
+
+        # Запись первой строки с индикацией финальных состояний
+        writer.writerow([''] + ['F' if state in final_states else '' for state in states])
+
+        # Запись второй строки с именами состояний
         writer.writerow([''] + states)
 
+        # Запись переходов
         for signal in signals:
             row = [signal] + ['' for _ in states]
             for from_state, to_state, edge_data in graph.edges(data=True):

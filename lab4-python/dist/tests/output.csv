@@ -1,5 +1,5 @@
-;;;;;F
-;frozenset({'q0'});frozenset();frozenset({'q1', 'q0'});frozenset({'q1'})
-a;frozenset({'q1', 'q0'});frozenset();frozenset({'q1', 'q0'});frozenset()
-b;frozenset();frozenset();frozenset({'q1'});frozenset({'q1'})
-ε;frozenset();frozenset();frozenset();frozenset()
+;;;F;;F
+;S0;S1;S2;S3;S4
+a;S2;;S2;S3,S3;S3
+b;S3;;S4;S3,S3;S4
+ε;S1;;S3;S3,S3;S3
