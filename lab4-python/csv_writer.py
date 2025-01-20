@@ -8,7 +8,7 @@ def write_graph_to_csv(graph, file_path):
         print("States:", states)
 
         signals = sorted(
-            set(edge_data['in_signal'] for _, _, edge_data in graph.edges(data=True) if edge_data['in_signal'] is not None)
+            set(edge_data['in_signal'] for _, _, edge_data in graph.edges(data=True) if edge_data['in_signal'] and edge_data['in_signal'] != 'ε')
         )
         print("Signals:", signals)
 
