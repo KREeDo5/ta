@@ -10,11 +10,11 @@ def main(input_file, output_file):
     write_graph_to_csv(dfa_graph, output_file)
 
 if __name__ == "__main__":
-    # if len(sys.argv) != 3:
-    #     print("main.exe <input_file.csv> <output_file.csv>")
-    #     sys.exit(1)
+    if len(sys.argv) != 3:
+        print("main.exe <input_file.csv> <output_file.csv>")
+        sys.exit(1)
 
-    # input_file, output_file = sys.argv[1], sys.argv[2]
-    input_file = "D:\\Repos\\Github\\taifya\\lab4-python\\dist\\tests\\test.csv"
-    output_file = "D:\\Repos\\Github\\taifya\\lab4-python\\dist\\tests\\output.csv"
+    input_file, output_file = sys.argv[1], sys.argv[2]
+    # input_file = "D:\\Repos\\Github\\taifya\\lab4-python\\dist\\tests\\test.csv"
+    # output_file = "D:\\Repos\\Github\\taifya\\lab4-python\\dist\\tests\\output.csv"
     main(input_file, output_file)

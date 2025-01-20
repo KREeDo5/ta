@@ -7,22 +7,34 @@ def convert_to_dfa(nfa):
     # Получаем начальное состояние NFA
     start_state = nfa.graph['start']
 
+    print("начальное состояние:", start_state)
+
     # Вычисляем ε-замыкание начального состояния
     epsilon_closure = get_epsilon_closure(nfa, {start_state})
 
+    print("ε-замыкание начального состояния:", epsilon_closure)
+
     # Используем очередь для обработки новых состояний DFA
     state_queue = [frozenset(epsilon_closure)]
-    dfa_states = {frozenset(epsilon_closure): 'q0'}  # отображение набора NFA-состояний в DFA-состояния
-    dfa.graph['start'] = 'q0'
+    dfa_states = {frozenset(epsilon_closure): 'S0'}  # отображение набора NFA-состояний в DFA-состояния
+    dfa.graph['start'] = 'S0'
     dfa_counter = 1
+
+    print(f"Начальное состояние DFA: {dfa_states[frozenset(epsilon_closure)]} с ε-замыканием: {epsilon_closure}")
 
     while state_queue:
         current_set = state_queue.pop(0)
         current_dfa_state = dfa_states[current_set]
 
-        # Определяем финальность текущего состояния
-        is_final = any(nfa.nodes[state].get('is_final', False) for state in current_set)
-        dfa.add_node(current_dfa_state, is_final=is_final)
+        print("current_dfa_state:", current_dfa_state)
+
+        # Проверяем финальность каждого состояния в current_set и добавляем их в DFA
+        for state in current_set:
+            is_final = nfa.nodes[state].get('is_final', False)
+            print(f"Состояние {state} финальное: {is_final}")
+            dfa.add_node(current_dfa_state, is_final=is_final)
+
+        print(f"Текущее состояние DFA: {current_dfa_state}, включает NFA состояния: {current_set}")
 
         # Получаем все возможные сигналы (кроме ε)
         signals = set(edge_data['in_signal'] for state in current_set
@@ -39,15 +51,18 @@ def convert_to_dfa(nfa):
 
             # Рассчитываем ε-замыкание для полученных состояний
             epsilon_closure_next = get_epsilon_closure(nfa, next_states)
+            print("ε-замыкание полученного состояния:", epsilon_closure_next)
             next_set = frozenset(epsilon_closure_next)
 
             if next_set not in dfa_states:
-                dfa_states[next_set] = f'q{dfa_counter}'
+                dfa_states[next_set] = f'S{dfa_counter}'
                 state_queue.append(next_set)
+                print(f"Новое состояние DFA: {dfa_states[next_set]} с ε-замыканием: {epsilon_closure_next}")
                 dfa_counter += 1
 
             # Добавляем переход в DFA
             dfa.add_edge(current_dfa_state, dfa_states[next_set], in_signal=signal)
+            print(f"Добавлен переход: {current_dfa_state} --{signal}--> {dfa_states[next_set]}")
 
     return dfa
 
