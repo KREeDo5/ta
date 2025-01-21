@@ -1,0 +1,10 @@
+digraph {
+	q0 [shape=circle]
+	q1 [shape=doublecircle]
+	q0 -> q2 [label="ε"]
+	q2 -> q1 [label="ε"]
+	q2 -> q3 [label="abc)*(ab"]
+	q3 -> q3 [label="abc)*(ab"]
+	q2 -> q3 [label="ε"]
+	q3 -> q1 [label="ε"]
+}
