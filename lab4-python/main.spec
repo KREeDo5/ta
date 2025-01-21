@@ -5,7 +5,11 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[
+        ('csv_reader.py', '.'),
+        ('graph_converter.py', '.'),
+        ('csv_writer.py', '.'),
+    ],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
