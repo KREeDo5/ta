@@ -63,5 +63,14 @@ if %errorlevel% neq 0 (
 )
 
 echo _______________________________
+echo Run test 6...
+main.exe ./tests/input6.csv ./tests/output/output6.csv
+if %errorlevel% neq 0 (
+    echo Test failed input6.csv
+    pause
+    exit /b %errorlevel%
+)
+
+echo _______________________________
 echo All tests completed successfully.
 pause
