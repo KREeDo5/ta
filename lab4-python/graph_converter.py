@@ -1,17 +1,12 @@
 import networkx as netx
 
 def convert_to_dfa(nfa):
-    # Создаем пустой граф для DFA
     dfa = netx.DiGraph()
 
-    # Получаем начальное состояние NFA
-    start_state = nfa.graph['start']
-
+    start_state = nfa.graph['start']  # Получаем начальное состояние NFA
     print("начальное состояние:", start_state)
 
-    # Вычисляем ε-замыкание начального состояния
-    epsilon_closure = get_epsilon_closure(nfa, {start_state})
-
+    epsilon_closure = get_epsilon_closure(nfa, {start_state}) # Вычисляем ε-замыкание начального состояния
     print("ε-замыкание начального состояния:", epsilon_closure)
 
     # Используем очередь для обработки новых состояний DFA
@@ -28,13 +23,11 @@ def convert_to_dfa(nfa):
 
         print("current_dfa_state:", current_dfa_state)
 
-        # Проверяем финальность каждого состояния в current_set и добавляем их в DFA
-        for state in current_set:
-            is_final = nfa.nodes[state].get('is_final', False)
-            print(f"Состояние {state} финальное: {is_final}")
-            dfa.add_node(current_dfa_state, is_final=is_final)
+        # Проверяем финальность текущего состояния
+        is_final = any(nfa.nodes[state].get('is_final', False) for state in current_set)
+        dfa.add_node(current_dfa_state, is_final=is_final)
 
-        print(f"Текущее состояние DFA: {current_dfa_state}, включает NFA состояния: {current_set}")
+        print(f"Текущее состояние DFA: {current_dfa_state}, включает NFA состояния: {current_set}, финальное: {is_final}")
 
         # Получаем все возможные сигналы (кроме ε)
         signals = set(edge_data['in_signal'] for state in current_set
