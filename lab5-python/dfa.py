@@ -1,4 +1,6 @@
 import csv
+from graphviz import Digraph
+
 class Dfa:
     def __init__(self, SList, Alph, TransList, S0, FList):
         self.SList = SList
@@ -22,3 +24,22 @@ class Dfa:
                     else:
                         row.append('')
                 writer.writerow(row)
+
+    def to_graph(self, filename='dfa'):
+        dot = Digraph()
+
+        # Добавляем вершины
+        for i in range(len(self.SList)):
+            if i in self.FList:
+                dot.node(f'S{i}', shape='doublecircle')
+            else:
+                dot.node(f'S{i}', shape='circle')
+
+        # Добавляем переходы
+        for i in range(len(self.SList)):
+            for a in self.Alph:
+                if a in self.TransList[i]:
+                    dot.edge(f'S{i}', f'S{self.TransList[i][a]}', label=a)
+
+        # Сохраняем и визуализируем граф
+        dot.render(filename, format='png', view=True)
