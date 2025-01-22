@@ -14,7 +14,8 @@ def replace_eps_epsilon(input_str):
 # ((b+a)*b|ε)b*
 # ((a|-)((dd*.d*)|(d*.dd*)))|(((dd*.d*)|(d*.dd*)))
 # (((dd*.d*)|(d*.dd*)))
-input = '(((dd*.d*)|eps))'
+# (((dd*.d*)|eps))
+input = '(abc)*(ab)*'
 
 input = replace_eps_epsilon(input)
 
@@ -27,4 +28,4 @@ alphabet = getAlphabet(regex)
 #print('Алфавит: ' + ''.join(sorted(alphabet)))
 graph = Graph(regex, alphabet)
 dfa = graph.toDfa(alphabet)
-dfa.write()
+dfa.to_csv()

@@ -10,12 +10,9 @@ class Graph:
         self.alphabet = alphabet
         self.functions()
 
-    def write(self):
-        self.root.write_level(0)
-
     def functions(self):
         self.root.calc_functions(0, self.followpos, self.alphabet)
-        print(self.followpos)
+        # print(self.followpos)
 
     def toDfa(self, alphabet):
 

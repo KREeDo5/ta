@@ -27,7 +27,7 @@ class GraphNode:
         self.firstpos = []
         self.lastpos = []
 
-        print('Current : ' + regex)
+        # print('Текущее выражение : ' + regex)
 
         self.isSymbol = (regex == '.') and ('.' in alphabet)
 
@@ -151,9 +151,3 @@ class GraphNode:
                         followpos[i][1] = sorted(followpos[i][1] + [j])
 
         return pos
-
-    def write_level(self, level):
-        print(str(level) + ' ' + self.item, self.firstpos, self.lastpos, self.emptyTransit,
-              '' if self.position == None else self.position)
-        for child in self.child:
-            child.write_level(level + 1)
