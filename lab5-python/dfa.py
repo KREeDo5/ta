@@ -31,9 +31,13 @@ class Dfa:
         # Добавляем вершины
         for i in range(len(self.SList)):
             if i in self.FList:
-                dot.node(f'S{i}', shape='doublecircle')
+                dot.node(f'S{i}', shape='doublecircle', color='red')
             else:
                 dot.node(f'S{i}', shape='circle')
+
+        # Добавляем невидимую вершину и стрелку, указывающую на S0
+        dot.node('start', shape='point', style='invis')
+        dot.edge('start', f'S{self.S0}', label='', style='solid')
 
         # Добавляем переходы
         for i in range(len(self.SList)):
