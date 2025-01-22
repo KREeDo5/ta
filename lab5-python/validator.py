@@ -1,4 +1,4 @@
-def valid_brackets(reg):
+def valid_brackets(reg, firstIteration):
     opened_brackets = 0
     for i in reg:
         if i == '(':
@@ -6,9 +6,11 @@ def valid_brackets(reg):
         if i == ')':
             opened_brackets -= 1
         if opened_brackets < 0:
-            print('Пропущены закрывающие скобки!')
+            if firstIteration:
+                print('Пропущены закрывающие скобки!')
             return False
     if opened_brackets == 0:
         return True
-    print('Пропущены открывающие скобки !')
+    if firstIteration:
+        print('Пропущены открывающие скобки !')
     return False
