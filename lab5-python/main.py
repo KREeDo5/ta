@@ -1,32 +1,25 @@
+from validator import valid_brackets
+from graph import Graph
+
 def getAlphabet(reg):
     return set(reg) - set('()|*+')
-
-def valid_brackets(regex):
-    opened_brackets = 0
-    for c in regex:
-        if c == '(':
-            opened_brackets += 1
-        if c == ')':
-            opened_brackets -= 1
-        if opened_brackets < 0:
-            print('Пропущены открывающие скобки!')
-            return False
-    if opened_brackets == 0:
-        return True
-    print('Пропущены открывающие скобки')
-    return False
 
 # (abc)*(ab)*
 # (abc)*a*b*
 # ((ab|aab)*a*)*
-input = '((ab|aab)*a*)*'
+# ((b+a)*b|ε)b*
+# ((a|-)((dd*.d*)|(d*.dd*)))|(((dd*.d*)|(d*.dd*)))
+# (((dd*.d*)|(d*.dd*)))
+input = '(abc)*(ab)*'
 
 if not valid_brackets(input):
     exit(1)
 alphabet = None
 
 regex = input + '#'
-print('regex : ' + regex)
+print('input : ' + input)
 alphabet = getAlphabet(regex)
-
-#строить дерево
+print('Алфавит: ' + ''.join(sorted(alphabet)))
+graph = Graph(regex, alphabet)
+dfa = graph.toDfa(alphabet)
+dfa.write()
