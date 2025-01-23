@@ -1,0 +1,11 @@
+digraph {
+	S0 [shape=circle]
+	S1 [color=red shape=doublecircle]
+	start [shape=point style=invis]
+	start -> S0 [label="" style=solid]
+	S0 -> S0 [label=c]
+	S0 -> S0 [label=a]
+	S0 -> S1 [label=b]
+	S1 -> S1 [label=c]
+	S1 -> S1 [label=a]
+}
