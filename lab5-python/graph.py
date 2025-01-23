@@ -21,7 +21,9 @@ class Graph:
                 if self.followpos[i][0] == '#':
                     return True
             return False
+
         q0 = self.root.firstpos
+        # убираем из списка пустой переход и финальный, чтобы в DFA они отсутствовали так как они не требуются
         Alph = alphabet - {'#', empty_transit}
 
         SList = []        # Список состояний
@@ -37,14 +39,15 @@ class Graph:
             TransList.append({})
 
             q = [i for i in SList if i not in CheckedList][0] # Берем первое необработанное состояние
+            #print(q) #вывод q0 (S0) при первой итерации, и последующих далее
             CheckedList.append(q)
 
             for a in Alph:
                 Transition = []
-                # Нахожу новое состояние из необработанного - объединение всех переходов по символу a
+                # Нахожу новое состояние из необработанного - объединение всех переходов по символу из алфавита (a)
                 for i in q:
                     if self.followpos[i][0] == a:
-                        Transition = Transition + self.followpos[i][1]
+                        Transition = Transition + self.followpos[i][1]  #добавляем список элемента из followpos
                 # Убираю дубликаты и сортирую
                 Transition = sorted(list(set(Transition)))
 
@@ -54,10 +57,10 @@ class Graph:
 
                 if Transition not in SList:
                     SList.append(Transition)
-                    # Помечаю что состояние - финальное
+                    # Помечаю что состояние - финальное (если у элемента из списка Transition есть переход в финальную позицию  #)
                     if isFinal(Transition):
                         FList.append(SList.index(Transition))
-                # Добавляю переход для необработанного состояния по символу a
+                # Добавляю переход для необработанного состояния по символу из алфавита (a)
                 # Указываю, что переход ведет в состояние Transition
                 TransList[SList.index(q)][a] = SList.index(Transition)
 

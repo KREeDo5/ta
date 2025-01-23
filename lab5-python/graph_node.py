@@ -27,7 +27,7 @@ class GraphNode:
         self.firstpos = []
         self.lastpos = []
 
-        # print('Текущее выражение : ' + regex)
+        print('Текущее выражение : ' + regex)
 
         self.isSymbol = (regex == '.') and ('.' in alphabet)
 
@@ -104,7 +104,8 @@ class GraphNode:
             # Добавляем текущий узел (позицию) в список followpos
             followpos.append([self.item, []])
             return pos + 1
-        # Если это дочерний узел
+
+        # Если есть дочерний узел, уходим в рекурсию
         for child in self.child:
             pos = child.calc_functions(pos, followpos, alphabet)
 

@@ -3,8 +3,8 @@ digraph {
 	S1 [color=red shape=doublecircle]
 	start [shape=point style=invis]
 	start -> S0 [label="" style=solid]
-	S0 -> S0 [label=r]
 	S0 -> S1 [label=s]
+	S0 -> S0 [label=r]
 	S1 -> S0 [label=t]
 	S1 -> S1 [label=u]
 }
