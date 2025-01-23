@@ -15,7 +15,8 @@ def replace_eps_epsilon(input_str):
 # ((a|-)((dd*.d*)|(d*.dd*)))|(((dd*.d*)|(d*.dd*)))
 # (((dd*.d*)|(d*.dd*)))
 # (((dd*.d*)|eps))
-input = '(abc)*(ab)*'
+# ab*(a|b*)
+input = '(a|b*)ab*'
 
 input = replace_eps_epsilon(input)
 
