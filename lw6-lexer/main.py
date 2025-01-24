@@ -26,11 +26,11 @@ def lex_numbers(lines):
 
     results = []
 
-    for line_no, line in enumerate(lines, start=1):
+    for lineNum, line in enumerate(lines, start=1):
         for match in number_pattern.finditer(line):
             results.append({
                 'num': match.group(),
-                'line': line_no,
+                'line': lineNum,
                 'pos': match.start() + 1  # Позиция начинается с 1
             })
 
