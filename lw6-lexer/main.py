@@ -13,6 +13,17 @@ import re
 # ?           | предыдущий символ или выражение могут быть в строке 0 или 1 раз (не * Клини)
 # [:punct:]   | знаки: ! " # $ % & ' ( ) * + , \ -. / : ; < = > ? @ [ ] ^ _ ` { | }
 
+def lex_results(pattern, lines):
+    results = []
+    for lineNum, line in enumerate(lines, start=1):
+        for match in pattern.finditer(line):
+            results.append({
+                'item': match.group(),
+                'line': lineNum,
+                'pos': match.start() + 1
+            })
+    return results
+
 def lex_numbers(lines):
     number_pattern = re.compile(r'''
         (?<!\w)  # Граница: перед числом не должно быть буквы/цифры
@@ -28,32 +39,7 @@ def lex_numbers(lines):
         (?!\w) # Граница: после числа не должно быть буквы/цифры
     ''', re.VERBOSE)
 
-    results = []
-
-    for lineNum, line in enumerate(lines, start=1):
-        for match in number_pattern.finditer(line):
-            results.append({
-                'item': match.group(),
-                'line': lineNum,
-                'pos': match.start() + 1  # Позиция начинается с 1
-            })
-
-    return results
-
-def lex_comments(lines):
-    comments_pattern = re.compile(r'//.*')  #TODO: многострочные комментарии /**/
-
-    results = []
-
-    for lineNum, line in enumerate(lines, start=1):
-        for match in comments_pattern.finditer(line):
-            results.append({
-                'item': match.group(),
-                'line': lineNum,
-                'pos': match.start() + 1
-            })
-
-    return results
+    return lex_results(number_pattern, lines)
 
 def lex_keywords(lines):
     keywords_pattern = re.compile(r'''
@@ -73,47 +59,7 @@ def lex_keywords(lines):
         \b # Граница слова
     ''', re.VERBOSE)
 
-    results = []
-
-    for lineNum, line in enumerate(lines, start=1):
-        for match in keywords_pattern.finditer(line):
-            results.append({
-                'item': match.group(),
-                'line': lineNum,
-                'pos': match.start() + 1
-            })
-
-    return results
-
-def lex_brackets(lines):
-    brackets_pattern = re.compile(r'[(){}\[\]]')
-
-    results = []
-
-    for lineNum, line in enumerate(lines, start=1):
-        for match in brackets_pattern.finditer(line):
-            results.append({
-                'item': match.group(),
-                'line': lineNum,
-                'pos': match.start() + 1
-            })
-
-    return results
-
-def lex_delimiters(lines):
-    delimiters_pattern = re.compile(r'/[nt]')
-
-    results = []
-
-    for lineNum, line in enumerate(lines, start=1):
-        for match in delimiters_pattern.finditer(line):
-            results.append({
-                'item': match.group(),
-                'line': lineNum,
-                'pos': match.start() + 1
-            })
-
-    return results
+    return lex_results(keywords_pattern, lines)
 
 def lex_operators(lines):
     operators_pattern = re.compile(r'''
@@ -130,17 +76,22 @@ def lex_operators(lines):
         |>
     ''', re.VERBOSE)
 
-    results = []
+    return lex_results(operators_pattern, lines)
 
-    for lineNum, line in enumerate(lines, start=1):
-        for match in operators_pattern.finditer(line):
-            results.append({
-                'item': match.group(),
-                'line': lineNum,
-                'pos': match.start() + 1
-            })
+def lex_comments(lines):
+    comments_pattern = re.compile(r'//.*')  #TODO: многострочные комментарии /**/
 
-    return results
+    return lex_results(comments_pattern, lines)
+
+def lex_brackets(lines):
+    brackets_pattern = re.compile(r'[(){}\[\]]')
+
+    return lex_results(brackets_pattern, lines)
+
+def lex_delimiters(lines):
+    delimiters_pattern = re.compile(r';|/n|/t')
+
+    return lex_results(delimiters_pattern, lines)
 
 def main(filename):
     with open(filename, 'r', encoding='utf-8') as file:
