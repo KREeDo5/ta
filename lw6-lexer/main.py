@@ -6,7 +6,6 @@ import re
 # Может содержать только буквы/цифры/нижнее подчеркивание
 #TODO: Знаки операций: +-/* и !=, ==, <, >
 #TODO: Разделители: /n /t  ;
-#TODO: Скобки: () {}
 
 # Оформление грамматики
 # \d          | 0-9 (любая ЦИФРА - не число)
@@ -88,6 +87,21 @@ def lex_keywords(lines):
 
     return results
 
+def lex_brackets(lines):
+    brackets_pattern = re.compile(r'[(){}\[\]]')
+
+    results = []
+
+    for lineNum, line in enumerate(lines, start=1):
+        for match in brackets_pattern.finditer(line):
+            results.append({
+                'item': match.group(),
+                'line': lineNum,
+                'pos': match.start() + 1
+            })
+
+    return results
+
 def main(filename):
     with open(filename, 'r', encoding='utf-8') as file:
         text = file.read()
@@ -96,15 +110,19 @@ def main(filename):
     numbers = lex_numbers(lines)
     comments = lex_comments(lines)
     keyWords = lex_keywords(lines)
+    brackets = lex_brackets(lines)
 
     for number in numbers:
-        print(f"Найдено число: '{number['item']}'       line {number['line']}       pos {number['pos']}")
+        print(f"line {number['line']} pos {number['pos']} Найдено число: '{number['item']}' ")
 
     for comment in comments:
-        print(f"Найден комментарий: '{comment['item']}'      line {comment['line']}      pos {comment['pos']}")
+        print(f"line {comment['line']} pos {comment['pos']} Найден комментарий: '{comment['item']}' ")
 
     for keyWord in keyWords:
-        print(f"Найдено ключевое слово: '{keyWord['item']}'      line {keyWord['line']}      pos {keyWord['pos']}")
+        print(f"line {keyWord['line']} pos {keyWord['pos']} Найдено ключевое слово: '{keyWord['item']}' ")
+
+    for bracket in brackets:
+        print(f"line {bracket['line']} pos {bracket['pos']} Найдена скобка: '{bracket['item']}' ")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
