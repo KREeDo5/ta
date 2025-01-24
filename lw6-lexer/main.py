@@ -15,7 +15,7 @@ import re
 
 def lex_numbers(lines):
     number_pattern = re.compile(r'''
-        (?<!\w)                 # Граница: перед числом не должно быть буквы/цифры
+        (?<!\w)  # Граница: перед числом не должно быть буквы/цифры
         (?:
             0b[01]+             # Двоичные числа (0b101)
             |0o[0-7]+           # Восьмеричные числа (0o71)
@@ -25,7 +25,7 @@ def lex_numbers(lines):
             |\d+e[+-]?\d+       # Числа в научной нотации (1e-8)
             |\d+                # Десятичные целые числа (123)
         )
-        (?!\w)                  # Граница: после числа не должно быть буквы/цифры
+        (?!\w) # Граница: после числа не должно быть буквы/цифры
     ''', re.VERBOSE)
 
     results = []
@@ -57,7 +57,7 @@ def lex_comments(lines):
 
 def lex_keywords(lines):
     keywords_pattern = re.compile(r'''
-        \b                      # Граница слова
+        \b # Граница слова
         (?:
             int
             |double
@@ -70,7 +70,7 @@ def lex_keywords(lines):
             |true
             |false
         )
-        \b                      # Граница слова
+        \b # Граница слова
     ''', re.VERBOSE)
 
     results = []
