@@ -36,14 +36,33 @@ def lex_numbers(lines):
 
     return results
 
+def lex_comments(lines):
+    comments_pattern = re.compile(r'//.*')
+
+    results = []
+
+    for lineNum, line in enumerate(lines, start=1):
+        for match in comments_pattern.finditer(line):
+            results.append({
+                'num': match.group(),
+                'line': lineNum,
+                'pos': match.start() + 1
+            })
+
+    return results
+
 def main(filename):
     with open(filename, 'r', encoding='utf-8') as file:
         text = file.read()
     lines = text.splitlines()  #разбиваю текст на множество строк
-    results = lex_numbers(lines)
+    numbers = lex_numbers(lines)
+    comments = lex_comments(lines)
 
-    for result in results:
-        print(f"'{result['num']}'       line {result['line']}       pos {result['pos']}")
+    for number in numbers:
+        print(f"Найдено число: '{number['num']}'       line {number['line']}       pos {number['pos']}")
+
+    for comment in comments:
+        print(f"Найден комментарий: '{comment['num']}'      line {comment['line']}      pos {comment['pos']}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
