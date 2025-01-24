@@ -4,8 +4,6 @@ import re
 #TODO: многострочные комментарии /**/
 #TODO: идентификаторы: Может начинаться либо с буквы, либо с нижнего подчеркивания.
 # Может содержать только буквы/цифры/нижнее подчеркивание
-#TODO: Знаки операций: +-/* и !=, ==, <, >
-#TODO: Разделители: /n /t  ;
 
 # Оформление грамматики
 # \d          | 0-9 (любая ЦИФРА - не число)
@@ -117,6 +115,33 @@ def lex_delimiters(lines):
 
     return results
 
+def lex_operators(lines):
+    operators_pattern = re.compile(r'''
+        (?<!/)     # Перед оператором не должно быть символа / (негативный просмотр назад)
+        (?!/)      # После оператора не должно быть символа /
+        (?<!\*)    # Перед оператором не должно быть символа *
+        (?!\*)     # После оператора не должно быть символа *
+        [+\-*/%]
+        |!=
+        |==
+        |<=
+        |>=
+        |<
+        |>
+    ''', re.VERBOSE)
+
+    results = []
+
+    for lineNum, line in enumerate(lines, start=1):
+        for match in operators_pattern.finditer(line):
+            results.append({
+                'item': match.group(),
+                'line': lineNum,
+                'pos': match.start() + 1
+            })
+
+    return results
+
 def main(filename):
     with open(filename, 'r', encoding='utf-8') as file:
         text = file.read()
@@ -127,6 +152,7 @@ def main(filename):
     keyWords = lex_keywords(lines)
     brackets = lex_brackets(lines)
     delimiters = lex_delimiters(lines)
+    operators = lex_operators(lines)
 
     for number in numbers:
         print(f"line {number['line']} pos {number['pos']} Найдено число: '{number['item']}' ")
@@ -142,6 +168,9 @@ def main(filename):
 
     for delimiter in delimiters:
         print(f"line {delimiter['line']} pos {delimiter['pos']} Найден разделитель: '{delimiter['item']}' ")
+
+    for operator in operators:
+        print(f"line {operator['line']} pos {operator['pos']} Найден оператор: '{operator['item']}' ")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
