@@ -8,19 +8,20 @@ import re
 # ?           | предыдущий символ или выражение могут быть в строке 0 или 1 раз (не * Клини)
 # [:punct:]   | знаки: ! " # $ % & ' ( ) * + , \ -. / : ; < = > ? @ [ ] ^ _ ` { | }
 
-def lex_results(pattern, text, type):
+def lex_results(pattern, text, token):
     results = []
     for lineNum, line in enumerate(text, start=1):
         for match in pattern.finditer(line):
-            token = None
+            type = None
             if match.lastgroup:
-                token = match.lastgroup
+                type = match.lastgroup
             results.append({
-                'token': token,
                 'type': type,
+                'token': token,
                 'item': match.group(),
                 'line': lineNum,
-                'pos': match.start() + 1
+                'start_pos': match.start() + 1,
+                'end_pos': match.end()
             })
     return results
 
@@ -128,25 +129,25 @@ def main(filename):
     identifiers = lex_identifiers(string)
 
     for number in numbers:
-        print(f"line {number['line']} pos {number['pos']} {number['token']}: '{number['item']}' ")
+        print(f"line {number['line']} pos {number['start_pos']} {number['end_pos']} {number['token']}: '{number['item']}' ")
 
     for comment in comments:
-        print(f"line {comment['line']} pos {comment['pos']} {comment['token']}: '{comment['item']}' ")
+        print(f"line {comment['line']} pos {comment['start_pos']} {number['end_pos']}  {comment['token']}: '{comment['item']}' ")
 
     for condition in conditions:
-        print(f"line {condition['line']} pos {condition['pos']} {condition['token']}: '{condition['item']}' ")
+        print(f"line {condition['line']} pos {condition['start_pos']} {number['end_pos']}  {condition['token']}: '{condition['item']}' ")
 
     for bracket in brackets:
-        print(f"line {bracket['line']} pos {bracket['pos']} {bracket['token']}: '{bracket['item']}' ")
+        print(f"line {bracket['line']} pos {bracket['start_pos']} {number['end_pos']}  {bracket['token']}: '{bracket['item']}' ")
 
     for separator in separators:
-        print(f"line {separator['line']} pos {separator['pos']} {separator['token']}: '{separator['item']}' ")
+        print(f"line {separator['line']} pos {separator['start_pos']} {number['end_pos']}  {separator['token']}: '{separator['item']}' ")
 
     for operator in operators:
-        print(f"line {operator['line']} pos {operator['pos']} {operator['token']}: '{operator['item']}' ")
+        print(f"line {operator['line']} pos {operator['start_pos']} {number['end_pos']}  {operator['token']}: '{operator['item']}' ")
 
     for identifier in identifiers:
-        print(f"line {identifier['line']} pos {identifier['pos']} {identifier['token']}: '{identifier['item']}' ")
+        print(f"line {identifier['line']} pos {identifier['start_pos']} {number['end_pos']}  {identifier['token']}: '{identifier['item']}' ")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
