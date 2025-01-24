@@ -1,7 +1,15 @@
 import sys
 import re
 
-def lex_numbers(text):
+# Оформление грамматики
+# \d          | 0-9 (любая ЦИФРА - не число)
+# \.          | соответствует точке в качестве литерала, а не символа.
+# .           | любой символ
+# \w          | а–я, А–Я, 0–9 или _
+# ?           | предыдущий символ или выражение могут быть в строке 0 или 1 раз (не * Клини)
+# [:punct:]   | знаки: ! " # $ % & ' ( ) * + , \ -. / : ; < = > ? @ [ ] ^ _ ` { | }
+
+def lex_numbers(lines):
     number_pattern = re.compile(r'''
         (?<!\w)                 # Граница: перед числом не должно быть буквы/цифры
         (?:                     # Группируем возможные форматы:
@@ -17,7 +25,6 @@ def lex_numbers(text):
     ''', re.VERBOSE)
 
     results = []
-    lines = text.splitlines()
 
     for line_no, line in enumerate(lines, start=1):
         for match in number_pattern.finditer(line):
@@ -32,8 +39,9 @@ def lex_numbers(text):
 def main(filename):
     with open(filename, 'r', encoding='utf-8') as file:
         text = file.read()
+    lines = text.splitlines()  #разбиваю текст на множество строк
+    results = lex_numbers(lines)
 
-    results = lex_numbers(text)
     for result in results:
         print(f"'{result['num']}'       line {result['line']}       pos {result['pos']}")
 
