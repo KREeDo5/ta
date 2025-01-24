@@ -102,6 +102,21 @@ def lex_brackets(lines):
 
     return results
 
+def lex_delimiters(lines):
+    delimiters_pattern = re.compile(r'/[nt]')
+
+    results = []
+
+    for lineNum, line in enumerate(lines, start=1):
+        for match in delimiters_pattern.finditer(line):
+            results.append({
+                'item': match.group(),
+                'line': lineNum,
+                'pos': match.start() + 1
+            })
+
+    return results
+
 def main(filename):
     with open(filename, 'r', encoding='utf-8') as file:
         text = file.read()
@@ -111,6 +126,7 @@ def main(filename):
     comments = lex_comments(lines)
     keyWords = lex_keywords(lines)
     brackets = lex_brackets(lines)
+    delimiters = lex_delimiters(lines)
 
     for number in numbers:
         print(f"line {number['line']} pos {number['pos']} Найдено число: '{number['item']}' ")
@@ -123,6 +139,9 @@ def main(filename):
 
     for bracket in brackets:
         print(f"line {bracket['line']} pos {bracket['pos']} Найдена скобка: '{bracket['item']}' ")
+
+    for delimiter in delimiters:
+        print(f"line {delimiter['line']} pos {delimiter['pos']} Найден разделитель: '{delimiter['item']}' ")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
