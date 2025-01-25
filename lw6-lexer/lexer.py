@@ -3,8 +3,6 @@ import re
 
 #TODO:
 # обработка чисел. Если после корректного числа идёт любой другой символ - ошбибка
-# operator(divide) '/' at line 30, pos 374-375
-# operator(multiply) '*' at line 30, pos 375-376
 # обработка ковычек
 
 class Lexer(object):
@@ -47,6 +45,23 @@ class Lexer(object):
 
         if self.pos >= len(self.text):
             return None
+
+        # Проверка на открывающий символ /* без закрывающего */
+        if self.text[self.pos:].startswith('/*'):
+            end_comment = self.text.find('*/', self.pos)
+            if end_comment == -1:  # Если закрывающий символ не найден
+                start_pos = self.pos
+                value = self.text[self.pos:self.pos + 2]  # Берем только /* для ошибки
+                token = Token(
+                    type="error",
+                    token_name="unterminated_comment",
+                    item=value,
+                    line=self.line,
+                    start_pos=start_pos,
+                    end_pos=self.pos + 2,
+                )
+                self.pos += 2  # Продолжаем анализ с символа после /*
+                return token
 
         # Ищем соответствие
         match = self.regex.match(self.text, self.pos)
