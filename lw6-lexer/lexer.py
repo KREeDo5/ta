@@ -24,12 +24,14 @@ class Lexer(object):
         self.text = None
         self.pos = 0
         self.line = 1
+        self.line_start = 0
 
     def input(self, text):
         """ Устанавливает текст для анализа. """
         self.text = text
         self.pos = 0
         self.line = 1
+        self.line_start = 0
 
     def token(self):
         """ Возвращает следующий токен. """
@@ -40,8 +42,12 @@ class Lexer(object):
         # if self.skip_whitespace:
         whitespace_match = re.match(r'\s+', self.text[self.pos:])
         if whitespace_match:
+            whitespace = whitespace_match.group(0)
             self.pos += whitespace_match.end()
-            self.line += whitespace_match.group(0).count('\n')
+            newline_count = whitespace.count('\n')
+            if newline_count > 0:
+                self.line += newline_count
+                self.line_start = self.pos - len(whitespace.split('\n')[-1])
 
         if self.pos >= len(self.text):
             return None
@@ -57,8 +63,8 @@ class Lexer(object):
                     token_name="unterminated_comment",
                     item=value,
                     line=self.line,
-                    start_pos=start_pos,
-                    end_pos=self.pos + 2,
+                    start_pos=start_pos - self.line_start,
+                    end_pos=self.pos + 2 - self.line_start,
                 )
                 self.pos += 2  # Продолжаем анализ с символа после /*
                 return token
@@ -78,13 +84,15 @@ class Lexer(object):
                 token_name=token_name,
                 item=value,
                 line=self.line,
-                start_pos=start_pos,
-                end_pos=end_pos,
+                start_pos=start_pos - self.line_start,
+                end_pos=end_pos - self.line_start,
             )
 
             # Обновляем текущую позицию
             self.pos = end_pos
             self.line += value.count('\n')
+            if '\n' in value:
+                self.line_start = self.pos - len(value.split('\n')[-1])
             return token
 
             # Если ни одно правило не совпало, возвращаем ошибочный токен
@@ -94,8 +102,8 @@ class Lexer(object):
             token_name="unknown",
             item=error_value,
             line=self.line,
-            start_pos=self.pos,
-            end_pos=self.pos + 1,
+            start_pos=self.pos - self.line_start,
+            end_pos=self.pos + 1 - self.line_start,
         )
         self.pos += 1
         return token
