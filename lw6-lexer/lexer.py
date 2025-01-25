@@ -7,10 +7,6 @@ import re
 
 class Lexer(object):
     def __init__(self):
-        """ Инициализация лексера с правилами.
-        :param rules: Список правил [(regex, token_name, type)].
-        # :param skip_whitespace: Пропускать ли пробелы.
-        """
         self.group_type = {}
         self.regex_parts = []
 
@@ -38,7 +34,6 @@ class Lexer(object):
         if self.pos >= len(self.text):
             return None
 
-        # # Пропускаем пробелы, если это включено
         # if self.skip_whitespace:
         whitespace_match = re.match(r'\s+', self.text[self.pos:])
         if whitespace_match:
@@ -51,23 +46,6 @@ class Lexer(object):
 
         if self.pos >= len(self.text):
             return None
-
-        # Проверка на открывающий символ /* без закрывающего */
-        if self.text[self.pos:].startswith('/*'):
-            end_comment = self.text.find('*/', self.pos)
-            if end_comment == -1:  # Если закрывающий символ не найден
-                start_pos = self.pos
-                value = self.text[self.pos:self.pos + 2]  # Берем только /* для ошибки
-                token = Token(
-                    type="error",
-                    token_name="unterminated_comment",
-                    item=value,
-                    line=self.line,
-                    start_pos=start_pos - self.line_start,
-                    end_pos=self.pos + 2 - self.line_start,
-                )
-                self.pos += 2  # Продолжаем анализ с символа после /*
-                return token
 
         # Ищем соответствие
         match = self.regex.match(self.text, self.pos)
@@ -129,6 +107,11 @@ rules = [
     # Комментарии
     (r'//.*', 'single_line_comment', 'comment'),
     (r'/\*[\s\S]*?\*/', 'multi_line_comment', 'comment'),
+
+    (r'/\*', 'unterminated_comment', 'error'),
+    # # Строковые литералы
+    # (r'"[^"\\]*(?:\\.[^"\\]*)*"', 'double_quoted_string', 'string_literal'),
+    # (r"'[^'\\]*(?:\\.[^'\\]*)*'", 'single_quoted_string', 'string_literal'),
 
     # Условные конструкции
     (r'\bint\b', 'int', 'keyword'),
