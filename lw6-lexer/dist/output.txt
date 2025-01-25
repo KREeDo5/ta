@@ -1,0 +1,87 @@
+comment(single_line_comment) '// Comment' at line 1, pos 0-10
+bracket(bracket_open) '(' at line 2, pos 11-12
+identifier(public_id) 'string' at line 2, pos 12-18
+bracket(bracket_close) ')' at line 2, pos 18-19
+bracket(brace_open) '{' at line 3, pos 20-21
+identifier(public_id) 'asd' at line 4, pos 22-25
+identifier(public_id) 'abc' at line 5, pos 26-29
+number(integer) '123' at line 6, pos 30-33
+bracket(brace_close) '}' at line 7, pos 34-35
+identifier(public_id) 'if1' at line 8, pos 36-39
+identifier(public_id) 'char' at line 8, pos 40-44
+identifier(public_id) 'int' at line 8, pos 45-48
+identifier(public_id) 'str' at line 8, pos 49-52
+number(integer) '123' at line 9, pos 53-56
+number(float) '12.134' at line 9, pos 57-63
+number(binary) '0b101001' at line 9, pos 64-72
+number(integer) '0' at line 9, pos 73-74
+identifier(public_id) 'b88' at line 9, pos 74-77
+error(unknown) '.' at line 9, pos 78-79
+number(integer) '123' at line 9, pos 79-82
+number(integer) '0123' at line 9, pos 84-88
+number(integer) '0' at line 9, pos 89-90
+identifier(public_id) 'b222' at line 9, pos 90-94
+number(scientific_float) '123.123e+23' at line 9, pos 95-106
+number(float) '123.123' at line 9, pos 107-114
+error(unknown) '.' at line 9, pos 114-115
+number(integer) '123' at line 9, pos 115-118
+number(scientific) '12e2' at line 10, pos 120-124
+number(scientific_float) '15.32e-24' at line 10, pos 125-134
+number(scientific) '12e12' at line 10, pos 135-140
+error(unknown) '.' at line 10, pos 140-141
+number(integer) '4' at line 10, pos 141-142
+identifier(public_id) 'abc' at line 11, pos 143-146
+number(integer) '1' at line 11, pos 147-148
+identifier(public_id) 'a' at line 11, pos 148-149
+identifier(public_id) 'a1' at line 11, pos 150-152
+error(unknown) ',' at line 11, pos 153-154
+error(unknown) 'ф' at line 11, pos 155-156
+error(unknown) 'ф' at line 11, pos 156-157
+error(unknown) 'ф' at line 11, pos 157-158
+error(unknown) 'ф' at line 11, pos 159-160
+identifier(public_id) 'f' at line 11, pos 160-161
+identifier(public_id) 'f' at line 11, pos 162-163
+error(unknown) 'ф' at line 11, pos 163-164
+identifier(private_id) '_abc' at line 11, pos 165-169
+error(unknown) '_' at line 11, pos 170-171
+identifier(private_id) '_a_b' at line 11, pos 172-176
+identifier(public_id) 'true' at line 12, pos 178-182
+error(unknown) '.' at line 12, pos 183-184
+identifier(public_id) 'false' at line 12, pos 184-189
+bracket(bracket_sq_open) '[' at line 12, pos 190-191
+identifier(public_id) 'a' at line 12, pos 191-192
+identifier(public_id) 'c' at line 12, pos 193-194
+identifier(public_id) 'k' at line 12, pos 195-196
+bracket(bracket_sq_close) ']' at line 12, pos 196-197
+error(unknown) '=' at line 12, pos 197-198
+operator(multiply) '*' at line 12, pos 199-200
+identifier(public_id) 'ing' at line 13, pos 201-204
+identifier(public_id) 'bool' at line 13, pos 206-210
+operator(plus) '+' at line 13, pos 211-212
+identifier(public_id) 'd' at line 13, pos 213-214
+operator(minus) '-' at line 13, pos 214-215
+identifier(public_id) 'ssssssssssssssssssssssssssssssssssssssssssssssssss' at line 14, pos 216-266
+error(unknown) '=' at line 15, pos 267-268
+separator(semicolon) ';' at line 15, pos 269-270
+operator(equal) '==' at line 15, pos 271-273
+error(unknown) '=' at line 15, pos 273-274
+operator(not_equal) '!=' at line 15, pos 275-277
+comment(multi_line_comment) '/*+=
+identificator_
+_ident
+_
+петя*/' at line 15, pos 278-313
+number(integer) '2147483647' at line 20, pos 314-324
+number(integer) '2147483646' at line 21, pos 325-335
+number(integer) '2147483649' at line 22, pos 336-346
+error(unknown) '"' at line 23, pos 347-348
+identifier(public_id) 'asd' at line 23, pos 348-351
+identifier(public_id) 'asd' at line 23, pos 352-355
+comment(multi_line_comment) '/*
+dd
+/*
+a
+
+/* */' at line 24, pos 356-373
+operator(divide) '/' at line 30, pos 374-375
+operator(multiply) '*' at line 30, pos 375-376
