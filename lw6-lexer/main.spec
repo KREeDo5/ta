@@ -5,7 +5,10 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[
+        ('lexer.py', '.'),
+        ('lexer_token.py', '.'),
+    ],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
