@@ -1,14 +1,11 @@
 from lexer_token import Token
 import re
 
-#TODO: 
-# Условные конструкции выше идентификаторов
+#TODO:
 # обработка чисел. Если после корректного числа идёт любой другой символ - ошбибка
 # operator(divide) '/' at line 30, pos 374-375
 # operator(multiply) '*' at line 30, pos 375-376
-# обработка ковычек, запятых
-# оператор сравнения ===
-# русские символы
+# обработка ковычек
 
 class Lexer(object):
     def __init__(self):
@@ -110,20 +107,7 @@ rules = [
     (r'//.*', 'single_line_comment', 'comment'),
     (r'/\*[\s\S]*?\*/', 'multi_line_comment', 'comment'),
 
-    # Идентификаторы
-    (r'_[a-zA-Z0-9][_a-zA-Z0-9]*', 'private_id', 'identifier'),
-    (r'[a-zA-Z][_a-zA-Z0-9]*', 'public_id', 'identifier'),
-
-    # Числа
-    (r'0b[01]+', 'binary', 'number'),                       # Двоичные числа (0b101)
-    (r'0o[0-7]+', 'octal', 'number'),                       # Восьмеричные числа (0o71)
-    (r'0x[\da-fA-F]+', 'hex', 'number'),                    # Шестнадцатеричные числа (0x1A45F0D)
-    (r'\d+\.\d+e[+-]?\d+', 'scientific_float', 'number'),   # Числа в научной нотации с точкой (123.456e+8)
-    (r'\d+\.\d+', 'float', 'number'),                       # Числа с плавающей точкой (123.456)
-    (r'\d+e[+-]?\d+', 'scientific', 'number'),              # Числа в научной нотации (1e-8)
-    (r'\d+', 'integer', 'number'),                          # Десятичные целые числа (123)
-
-    # Условные конструкции TODO: выше идентификаторов
+    # Условные конструкции
     (r'\bint\b', 'int', 'keyword'),
     (r'\bdouble\b', 'double', 'keyword'),
     (r'\bchar\b', 'char', 'keyword'),
@@ -135,6 +119,25 @@ rules = [
     (r'\btrue\b', 'true', 'keyword'),
     (r'\bfalse\b', 'false', 'keyword'),
 
+    # Идентификаторы
+    (r'_[a-zA-Zа-яА-ЯёЁ0-9][_a-zA-Zа-яА-ЯёЁ0-9]*', 'private_id', 'identifier'),
+    (r'[a-zA-Zа-яА-ЯёЁ][_a-zA-Zа-яА-ЯёЁ0-9]*', 'public_id', 'identifier'),
+
+    # Числа
+    (r'0b[01]+', 'binary', 'number'),                       # Двоичные числа (0b101)
+    (r'0o[0-7]+', 'octal', 'number'),                       # Восьмеричные числа (0o71)
+    (r'0x[\da-fA-F]+', 'hex', 'number'),                    # Шестнадцатеричные числа (0x1A45F0D)
+    (r'\d+\.\d+e[+-]?\d+', 'scientific_float', 'number'),   # Числа в научной нотации с точкой (123.456e+8)
+    (r'\d+\.\d+', 'float', 'number'),                       # Числа с плавающей точкой (123.456)
+    (r'\d+e[+-]?\d+', 'scientific', 'number'),              # Числа в научной нотации (1e-8)
+    (r'\d+', 'integer', 'number'),                          # Десятичные целые числа (123)
+
+    # Разделители
+    (r';', 'semicolon', 'separator'),
+    (r',', 'comma', 'separator'),
+    (r'/n', 'newline', 'separator'),
+    (r'/t', 'tab', 'separator'),
+
     # Операторы
     (r'\+', 'plus', 'operator'),
     (r'-', 'minus', 'operator'),
@@ -142,7 +145,9 @@ rules = [
     (r'/', 'divide', 'operator'),
     (r'%', 'module', 'operator'),
     (r'!=', 'not_equal', 'operator'),
+    (r'===', 'strict_equal', 'operator'),
     (r'==', 'equal', 'operator'),
+    (r'=', 'set', 'operator'),
     (r'<=', 'less_equal', 'operator'),
     (r'>=', 'greater_equal', 'operator'),
     (r'<', 'less', 'operator'),
@@ -155,9 +160,4 @@ rules = [
     (r'\}', 'brace_close', 'bracket'),
     (r'\[', 'bracket_sq_open', 'bracket'),
     (r'\]', 'bracket_sq_close', 'bracket'),
-
-    # Разделители
-    (r';', 'semicolon', 'separator'),
-    (r'/n', 'newline', 'separator'),
-    (r'/t', 'tab', 'separator'),
 ]
