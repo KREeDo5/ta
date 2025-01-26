@@ -93,14 +93,6 @@ class Lexer(object):
                 break
             yield token
 
-
-class LexerError(Exception):
-    def __init__(self, pos):
-        self.pos = pos
-
-    def __str__(self):
-        return f"Lexer error at position {self.pos}"
-
 # Правила лексера
 rules = [
     # Комментарии

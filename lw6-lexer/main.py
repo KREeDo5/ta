@@ -1,11 +1,11 @@
 import sys
-from lexer import Lexer, LexerError
+from lexer import Lexer
 
 def main(input_filename, output_filename):
     with open(input_filename, 'r', encoding='utf-8') as file:
         text = file.read()
 
-    output_code_filename =  './code_output.txt'   
+    output_code_filename =  './code_output.txt'
 
     lx = Lexer()
     lx.input(text)
