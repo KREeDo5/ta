@@ -138,6 +138,10 @@ rules = [
     # Идентификаторы
     (r'_[a-zA-Zа-яА-ЯёЁ0-9][_a-zA-Zа-яА-ЯёЁ0-9]*', 'private_id', 'identifier'),
     (r'[a-zA-Zа-яА-ЯёЁ][_a-zA-Zа-яА-ЯёЁ0-9]*', 'public_id', 'identifier'),
+    # (r'_[а-яА-ЯёЁ0-9][_а-яА-ЯёЁ0-9]*', 'private_id_ru', 'identifier'),
+    # (r'[а-яА-ЯёЁ][_а-яА-ЯёЁ0-9]*', 'public_id_ru', 'identifier'),
+    # (r'_[a-zA-Z0-9][_a-zA-Z0-9]*', 'private_id_en', 'identifier'),
+    # (r'[a-zA-Z][_a-zA-Z0-9]*', 'public_id_en', 'identifier'),
 
     # Числа
     (r'0b[01]+', 'binary', 'number'),                       # Двоичные числа (0b101)
