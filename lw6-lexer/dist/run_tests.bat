@@ -1,7 +1,7 @@
 @echo off
 
 echo Run test example...
-main.exe ./test.txt
+main.exe ./test.txt ./output.txt
 if %errorlevel% neq 0 (
     echo Test failed test.txt
     pause

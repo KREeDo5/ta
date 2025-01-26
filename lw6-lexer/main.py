@@ -1,24 +1,23 @@
 import sys
 from lexer import Lexer, LexerError
 
-def main(filename):
-    with open(filename, 'r', encoding='utf-8') as file:
+def main(input_filename, output_filename):
+    with open(input_filename, 'r', encoding='utf-8') as file:
         text = file.read()
 
     lx = Lexer()
     lx.input(text)
 
     try:
-        for token in lx.tokens():
-            print(token)
+        with open(output_filename, 'w', encoding='utf-8') as output_file:
+            for token in lx.tokens():
+                output_file.write(str(token) + '\n')
     except LexerError as errorString:
-        print(errorString)
-
-    # for item in code:
-    #     print(f"line {item['line']} pos {item['start_pos']} {item['end_pos']} {item['token']}: '{item['item']}' ")
+        with open(output_filename, 'w', encoding='utf-8') as output_file:
+            output_file.write(str(errorString) + '\n')
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: main.exe <filename>")
+    if len(sys.argv) != 3:
+        print("Введите: main.exe <input_filename> <output_filename>")
     else:
-        main(sys.argv[1])
+        main(sys.argv[1], sys.argv[2])
