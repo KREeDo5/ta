@@ -1,9 +1,6 @@
 from lexer_token import Token
 import re
 
-#TODO:
-# обработка чисел. Если после корректного числа идёт любой другой символ - ошибка
-
 class Lexer(object):
     def __init__(self):
         self.group_type = {}
@@ -143,14 +140,28 @@ rules = [
     # (r'_[a-zA-Z0-9][_a-zA-Z0-9]*', 'private_id_en', 'identifier'),
     # (r'[a-zA-Z][_a-zA-Z0-9]*', 'public_id_en', 'identifier'),
 
+    # Неправильные форматы чисел
+    (r'0[bB][^01\s]+', 'invalid_binary', 'error'),                         # Некорректные двоичные числа
+    (r'0[oO][^0-7\s]+', 'invalid_octal', 'error'),                         # Некорректные восьмеричные числа
+    (r'0[xX]([g-zG-Z]+|[\d]*[g-zG-Z]+[\d]*)', 'invalid_hex', 'error'),     # Некорректные шестнадцатеричные числа (0x1A45F0D)
+    (r'0[^bBoOxX0-9][\da-zA-Z]+', 'unsupported_number_system', 'error'),   # Неподдерживаемая система счисления
+    (r'(\d+\.\d+[\.]+[\d]*)', 'invalid_float', 'error'),                   # Лишние точки в числе
+    (r'\d+e[+-]?\d+\.\d+', 'invalid_scientific', 'error'),                 # Неверная научная нотация
+    (r'\.\d+', 'invalid_leading_dot', 'error'),                            # Начало с точки без целой части
+
+
     # Числа
-    (r'0b[01]+', 'binary', 'number'),                       # Двоичные числа (0b101)
-    (r'0o[0-7]+', 'octal', 'number'),                       # Восьмеричные числа (0o71)
-    (r'0x[\da-fA-F]+', 'hex', 'number'),                    # Шестнадцатеричные числа (0x1A45F0D)
-    (r'\d+\.\d+e[+-]?\d+', 'scientific_float', 'number'),   # Числа в научной нотации с точкой (123.456e+8)
-    (r'\d+\.\d+', 'float', 'number'),                       # Числа с плавающей точкой (123.456)
-    (r'\d+e[+-]?\d+', 'scientific', 'number'),              # Числа в научной нотации (1e-8)
-    (r'\d+', 'integer', 'number'),                          # Десятичные целые числа (123)
+    (r'0[bB][01]+', 'binary', 'number'),                                      # Двоичные числа (0b101)
+    (r'0[oO][0-7]+', 'octal', 'number'),                                      # Восьмеричные числа (0o71)
+    (r'0[xX][\da-fA-F]+', 'hex', 'number'),                                   # Шестнадцатеричные числа (0x1A45F0D)
+    (r'\d+\.\d+e[+-]?\d+', 'scientific_float', 'number'),                  # Числа в научной нотации с точкой (123.456e+8)
+    (r'\d+\.\d+', 'float', 'number'),                                      # Числа с плавающей точкой (123.456)
+    (r'\d+e[+-]?\d+', 'scientific', 'number'),                             # Числа в научной нотации (1e-8)
+    (r'\d+', 'integer', 'number'),                                         # Десятичные целые числа (123)
+
+    (r'0[bB]$', 'unterminated_binary', 'error'),                              # Незавершённый префикс двоичных чисел
+    (r'0[oO]$', 'unterminated_octal', 'error'),                               # Незавершённый префикс восьмеричных чисел
+    (r'0[xX]$', 'unterminated_hex', 'error'),                                 # Незавершённый префикс шестнадцатеричных чисел
 
     # Разделители
     (r';', 'semicolon', 'separator'),
