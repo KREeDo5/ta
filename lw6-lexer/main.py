@@ -20,6 +20,7 @@ def main(input_filename, output_filename):
         for token in tokenList:
             if token.type != 'comment':
                 output_file.write(str(token) + '\n')
+        output_file.write('Конец файла')
 
 
 if __name__ == "__main__":

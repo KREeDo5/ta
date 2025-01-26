@@ -132,32 +132,35 @@ rules = [
     (r'\btrue\b', 'true', 'keyword'),
     (r'\bfalse\b', 'false', 'keyword'),
 
-    # Идентификаторы
-    (r'_[a-zA-Zа-яА-ЯёЁ0-9][_a-zA-Zа-яА-ЯёЁ0-9]*', 'private_id', 'identifier'),
-    (r'[a-zA-Zа-яА-ЯёЁ][_a-zA-Zа-яА-ЯёЁ0-9]*', 'public_id', 'identifier'),
+    # Длинные ошибочные идентификаторы (30 >=)
+    (r'_*[_a-zA-Zа-яА-ЯёЁ0-9]{29,}', 'overflow_id', 'error'),
+
+    # Идентификаторы (длина 1-30)
+    (r'_[a-zA-Zа-яА-ЯёЁ0-9][_a-zA-Zа-яА-ЯёЁ0-9]{0,28}', 'private_id', 'identifier'),
+    (r'[a-zA-Zа-яА-ЯёЁ][_a-zA-Zа-яА-ЯёЁ0-9]{0,28}', 'public_id', 'identifier'),
+
     # (r'_[а-яА-ЯёЁ0-9][_а-яА-ЯёЁ0-9]*', 'private_id_ru', 'identifier'),
     # (r'[а-яА-ЯёЁ][_а-яА-ЯёЁ0-9]*', 'public_id_ru', 'identifier'),
     # (r'_[a-zA-Z0-9][_a-zA-Z0-9]*', 'private_id_en', 'identifier'),
     # (r'[a-zA-Z][_a-zA-Z0-9]*', 'public_id_en', 'identifier'),
 
     # Неправильные форматы чисел
-    (r'0[bB][^01\s]+', 'invalid_binary', 'error'),                         # Некорректные двоичные числа
-    (r'0[oO][^0-7\s]+', 'invalid_octal', 'error'),                         # Некорректные восьмеричные числа
-    (r'0[xX]([g-zG-Z]+|[\d]*[g-zG-Z]+[\d]*)', 'invalid_hex', 'error'),     # Некорректные шестнадцатеричные числа (0x1A45F0D)
-    (r'0[^bBoOxX0-9][\da-zA-Z]+', 'unsupported_number_system', 'error'),   # Неподдерживаемая система счисления
-    (r'(\d+\.\d+[\.]+[\d]*)', 'invalid_float', 'error'),                   # Лишние точки в числе
-    (r'\d+e[+-]?\d+\.\d+', 'invalid_scientific', 'error'),                 # Неверная научная нотация
-    (r'\.\d+', 'invalid_leading_dot', 'error'),                            # Начало с точки без целой части
-
+    (r'0[bB][^01\s]+', 'invalid_binary', 'error'),                            # Некорректные двоичные числа
+    (r'0[oO][^0-7\s]+', 'invalid_octal', 'error'),                            # Некорректные восьмеричные числа
+    (r'0[xX]([g-zG-Z]+|[\d]*[g-zG-Z]+[\d]*)', 'invalid_hex', 'error'),        # Некорректные шестнадцатеричные числа (0x1A45F0D)
+    (r'0[^bBoOxX0-9][\da-zA-Z]+', 'unsupported_number_system', 'error'),      # Неподдерживаемая система счисления
+    (r'(\d+\.\d+[\.]+[\d]*)', 'invalid_float', 'error'),                      # Лишние точки в числе
+    (r'\d+e[+-]?\d+\.\d+', 'invalid_scientific', 'error'),                    # Неверная научная нотация
+    (r'\.\d+', 'invalid_leading_dot', 'error'),                               # Начало с точки без целой части
 
     # Числа
     (r'0[bB][01]+', 'binary', 'number'),                                      # Двоичные числа (0b101)
     (r'0[oO][0-7]+', 'octal', 'number'),                                      # Восьмеричные числа (0o71)
     (r'0[xX][\da-fA-F]+', 'hex', 'number'),                                   # Шестнадцатеричные числа (0x1A45F0D)
-    (r'\d+\.\d+e[+-]?\d+', 'scientific_float', 'number'),                  # Числа в научной нотации с точкой (123.456e+8)
-    (r'\d+\.\d+', 'float', 'number'),                                      # Числа с плавающей точкой (123.456)
-    (r'\d+e[+-]?\d+', 'scientific', 'number'),                             # Числа в научной нотации (1e-8)
-    (r'\d+', 'integer', 'number'),                                         # Десятичные целые числа (123)
+    (r'\d+\.\d+e[+-]?\d+', 'scientific_float', 'number'),                     # Числа в научной нотации с точкой (123.456e+8)
+    (r'\d+\.\d+', 'float', 'number'),                                         # Числа с плавающей точкой (123.456)
+    (r'\d+e[+-]?\d+', 'scientific', 'number'),                                # Числа в научной нотации (1e-8)
+    (r'\d+', 'integer', 'number'),                                            # Десятичные целые числа (123)
 
     (r'0[bB]$', 'unterminated_binary', 'error'),                              # Незавершённый префикс двоичных чисел
     (r'0[oO]$', 'unterminated_octal', 'error'),                               # Незавершённый префикс восьмеричных чисел
