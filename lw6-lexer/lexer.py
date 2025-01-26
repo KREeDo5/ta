@@ -2,8 +2,7 @@ from lexer_token import Token
 import re
 
 #TODO:
-# обработка чисел. Если после корректного числа идёт любой другой символ - ошбибка
-# обработка ковычек
+# обработка чисел. Если после корректного числа идёт любой другой символ - ошибка
 
 class Lexer(object):
     def __init__(self):
@@ -73,7 +72,7 @@ class Lexer(object):
                 self.line_start = self.pos - len(value.split('\n')[-1])
             return token
 
-            # Если ни одно правило не совпало, возвращаем ошибочный токен
+        # Если ни одно правило не совпало, возвращаем ошибочный токен
         error_value = self.text[self.pos]
         token = Token(
             type="error",
@@ -109,9 +108,28 @@ rules = [
     (r'/\*[\s\S]*?\*/', 'multi_line_comment', 'comment'),
 
     (r'/\*', 'unterminated_comment', 'error'),
-    # # Строковые литералы
-    # (r'"[^"\\]*(?:\\.[^"\\]*)*"', 'double_quoted_string', 'string_literal'),
-    # (r"'[^'\\]*(?:\\.[^'\\]*)*'", 'single_quoted_string', 'string_literal'),
+
+    # Строковые литералы
+    # (r'"(?:[^"\\]|\\.)*"', 'double_quoted_string', 'string_literal'),
+    # (r"'(?:[^'\\]|\\.)*'", 'single_quoted_string', 'string_literal'),
+
+    (r'"', 'double_quote', 'quote'),
+    (r"'", 'single_quote', 'quote'),
+
+    # (r'"', 'unterminated_double_quote', 'error'),
+    # (r"'", 'unterminated_single_quote', 'error'),
+
+    # (r'\((?:[^"\\]|\\.)*"', 'unterminated_bracket_open', 'error'),
+    # (r"\{(?:[^'\\]|\\.)*'", 'unterminated_brace_open', 'error'),
+    # (r"\[(?:[^'\\]|\\.)*'", 'unterminated_bracket_sq_open', 'error'),
+
+    # Скобки
+    (r'\(', 'bracket_open', 'bracket'),
+    (r'\)', 'bracket_close', 'bracket'),
+    (r'\{', 'brace_open', 'bracket'),
+    (r'\}', 'brace_close', 'bracket'),
+    (r'\[', 'bracket_sq_open', 'bracket'),
+    (r'\]', 'bracket_sq_close', 'bracket'),
 
     # Условные конструкции
     (r'\bint\b', 'int', 'keyword'),
@@ -158,12 +176,4 @@ rules = [
     (r'>=', 'greater_equal', 'operator'),
     (r'<', 'less', 'operator'),
     (r'>', 'greater', 'operator'),
-
-    # Скобки
-    (r'\(', 'bracket_open', 'bracket'),
-    (r'\)', 'bracket_close', 'bracket'),
-    (r'\{', 'brace_open', 'bracket'),
-    (r'\}', 'brace_close', 'bracket'),
-    (r'\[', 'bracket_sq_open', 'bracket'),
-    (r'\]', 'bracket_sq_close', 'bracket'),
 ]

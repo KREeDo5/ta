@@ -12,6 +12,9 @@ abc 1a a1 , ффф фf fф _abc _ _a_b
 true .false [a c k]= *
 ing  bool + d-
 ssssssssssssssssssssssssssssssssssssssssssssssssss
+identif //icator_*
+identi//ficator___             asd
+//identificator__01_,abc
 = ; === != /*+=
 identificator_
 _ident
