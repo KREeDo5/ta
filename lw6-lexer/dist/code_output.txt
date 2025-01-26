@@ -1,0 +1,92 @@
+comment(single_line_comment) '// Comment' at line 1, pos 0-10
+bracket(bracket_open) '(' at line 2, pos 0-1
+keyword(string) 'string' at line 2, pos 1-7
+bracket(bracket_close) ')' at line 2, pos 7-8
+bracket(brace_open) '{' at line 3, pos 0-1
+identifier(public_id) 'asd' at line 4, pos 0-3
+identifier(public_id) 'abc' at line 5, pos 0-3
+number(integer) '123' at line 6, pos 0-3
+bracket(brace_close) '}' at line 7, pos 0-1
+identifier(public_id) 'if1' at line 8, pos 0-3
+keyword(char) 'char' at line 8, pos 4-8
+keyword(int) 'int' at line 8, pos 9-12
+identifier(public_id) 'str' at line 8, pos 13-16
+keyword(if) 'if' at line 8, pos 17-19
+number(integer) '123' at line 9, pos 0-3
+number(float) '12.134' at line 9, pos 4-10
+number(binary) '0b101001' at line 9, pos 11-19
+number(integer) '0' at line 9, pos 20-21
+identifier(public_id) 'b88' at line 9, pos 21-24
+error(unknown) '.' at line 9, pos 25-26
+number(integer) '123' at line 9, pos 26-29
+number(integer) '0123' at line 9, pos 31-35
+number(integer) '0' at line 9, pos 36-37
+identifier(public_id) 'b222' at line 9, pos 37-41
+number(scientific_float) '123.123e+23' at line 9, pos 42-53
+number(float) '123.123' at line 9, pos 54-61
+error(unknown) '.' at line 9, pos 61-62
+number(integer) '123' at line 9, pos 62-65
+number(scientific) '12e2' at line 10, pos 0-4
+number(scientific_float) '15.32e-24' at line 10, pos 5-14
+number(scientific) '12e12' at line 10, pos 15-20
+error(unknown) '.' at line 10, pos 20-21
+number(integer) '4' at line 10, pos 21-22
+identifier(public_id) 'abc' at line 11, pos 0-3
+number(integer) '1' at line 11, pos 4-5
+identifier(public_id) 'a' at line 11, pos 5-6
+identifier(public_id) 'a1' at line 11, pos 7-9
+separator(comma) ',' at line 11, pos 10-11
+identifier(public_id) 'ффф' at line 11, pos 12-15
+identifier(public_id) 'фf' at line 11, pos 16-18
+identifier(public_id) 'fф' at line 11, pos 19-21
+identifier(private_id) '_abc' at line 11, pos 22-26
+error(unknown) '_' at line 11, pos 27-28
+identifier(private_id) '_a_b' at line 11, pos 29-33
+keyword(true) 'true' at line 12, pos 0-4
+error(unknown) '.' at line 12, pos 5-6
+keyword(false) 'false' at line 12, pos 6-11
+bracket(bracket_sq_open) '[' at line 12, pos 12-13
+identifier(public_id) 'a' at line 12, pos 13-14
+identifier(public_id) 'c' at line 12, pos 15-16
+identifier(public_id) 'k' at line 12, pos 17-18
+bracket(bracket_sq_close) ']' at line 12, pos 18-19
+operator(set) '=' at line 12, pos 19-20
+operator(multiply) '*' at line 12, pos 21-22
+identifier(public_id) 'ing' at line 13, pos 0-3
+keyword(bool) 'bool' at line 13, pos 5-9
+operator(plus) '+' at line 13, pos 10-11
+identifier(public_id) 'd' at line 13, pos 12-13
+operator(minus) '-' at line 13, pos 13-14
+identifier(public_id) 'ssssssssssssssssssssssssssssssssssssssssssssssssss' at line 14, pos 0-50
+identifier(public_id) 'identif' at line 15, pos 0-7
+comment(single_line_comment) '//icator_*' at line 15, pos 8-18
+identifier(public_id) 'identi' at line 16, pos 0-6
+comment(single_line_comment) '//ficator___             asd' at line 16, pos 6-34
+comment(single_line_comment) '//identificator__01_,abc' at line 17, pos 0-24
+operator(set) '=' at line 18, pos 0-1
+separator(semicolon) ';' at line 18, pos 2-3
+operator(strict_equal) '===' at line 18, pos 4-7
+operator(not_equal) '!=' at line 18, pos 8-10
+comment(multi_line_comment) '/*+=
+identificator_
+_ident
+_
+петя*/' at line 18, pos 11-46
+number(integer) '2147483647' at line 23, pos 0-10
+number(integer) '2147483646' at line 24, pos 0-10
+number(integer) '2147483649' at line 25, pos 0-10
+quote(double_quote) '"' at line 26, pos 0-1
+identifier(public_id) 'asd' at line 26, pos 1-4
+identifier(public_id) 'asd' at line 26, pos 5-8
+comment(multi_line_comment) '/*
+dd
+/*
+a
+
+  */' at line 27, pos 0-16
+error(unterminated_comment) '/*' at line 33, pos 0-2
+identifier(public_id) 'bcd' at line 37, pos 2-5
+quote(double_quote) '"' at line 39, pos 0-1
+identifier(public_id) 'sadsad' at line 39, pos 1-7
+quote(double_quote) '"' at line 39, pos 7-8
+number(integer) '1' at line 40, pos 0-1
