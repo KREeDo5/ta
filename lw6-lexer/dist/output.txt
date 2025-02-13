@@ -1,63 +1,66 @@
-( : bracket(bracket_open) line 2, pos 0-1
-string : keyword(string) line 2, pos 1-7
-) : bracket(bracket_close) line 2, pos 7-8
-{ : bracket(brace_open) line 3, pos 0-1
-asd : identifier(public_id) line 4, pos 0-3
-abc : identifier(public_id) line 5, pos 0-3
-123 : number(integer) line 6, pos 0-3
-} : bracket(brace_close) line 7, pos 0-1
-if1 : identifier(public_id) line 8, pos 0-3
-char : keyword(char) line 8, pos 4-8
-int : keyword(int) line 8, pos 9-12
-str : identifier(public_id) line 8, pos 13-16
-123 : number(integer) line 9, pos 0-3
-12.134 : number(float) line 9, pos 4-10
-0b101001 : number(binary) line 9, pos 11-19
-0b88 : error(invalid_binary) line 9, pos 20-24
-.123 : error(invalid_leading_dot) line 9, pos 25-29
-0123 : number(integer) line 9, pos 31-35
-0b222 : error(invalid_binary) line 9, pos 36-41
-123.123e+23 : number(scientific_float) line 9, pos 42-53
-123.123.123 : error(invalid_float) line 9, pos 54-65
-12e2 : number(scientific) line 10, pos 0-4
-15.32e-24 : number(scientific_float) line 10, pos 5-14
-12e12.4 : error(invalid_scientific) line 10, pos 15-22
-abc : identifier(public_id) line 11, pos 0-3
-1 : number(integer) line 11, pos 4-5
-a : identifier(public_id) line 11, pos 5-6
-a1 : identifier(public_id) line 11, pos 7-9
-, : separator(comma) line 11, pos 10-11
-ффф : identifier(public_id) line 11, pos 12-15
-фf : identifier(public_id) line 11, pos 16-18
-fф : identifier(public_id) line 11, pos 19-21
-_abc : identifier(private_id) line 11, pos 22-26
-_ : error(unknown) line 11, pos 27-28
-_a_b : identifier(private_id) line 11, pos 29-33
-true : keyword(true) line 12, pos 0-4
-. : error(unknown) line 12, pos 5-6
-false : keyword(false) line 12, pos 6-11
-[ : bracket(bracket_sq_open) line 12, pos 12-13
-a : identifier(public_id) line 12, pos 13-14
-c : identifier(public_id) line 12, pos 15-16
-k : identifier(public_id) line 12, pos 17-18
-] : bracket(bracket_sq_close) line 12, pos 18-19
-= : operator(set) line 12, pos 19-20
-* : operator(multiply) line 12, pos 21-22
-ing : identifier(public_id) line 13, pos 0-3
-bool : keyword(bool) line 13, pos 5-9
-+ : operator(plus) line 13, pos 10-11
-d : identifier(public_id) line 13, pos 12-13
-- : operator(minus) line 13, pos 13-14
-ssssssssssssssssssssssssssssssssssssssssssssssssss : error(overflow_id) line 14, pos 0-50
-= : operator(set) line 15, pos 0-1
-; : separator(semicolon) line 15, pos 2-3
-=== : operator(strict_equal) line 15, pos 4-7
-!= : operator(not_equal) line 15, pos 8-10
-2147483647 : number(integer) line 20, pos 0-10
-2147483646 : number(integer) line 21, pos 0-10
-2147483649 : number(integer) line 22, pos 0-10
-" : quote(double_quote) line 23, pos 0-1
-asd : identifier(public_id) line 23, pos 1-4
-asd : identifier(public_id) line 23, pos 5-8
-/* : error(unterminated_comment) line 30, pos 0-2
+( : bracket(bracket_open) 2 : 0
+string : keyword(string) 2 : 1
+) : bracket(bracket_close) 2 : 7
+{ : bracket(brace_open) 3 : 0
+asd : identifier(public_id) 4 : 0
+abc : identifier(public_id) 5 : 0
+123 : number(integer) 6 : 0
+} : bracket(brace_close) 7 : 0
+true1 : identifier(public_id) 8 : 0
+. : error(unknown) 8 : 6
+true1 : identifier(public_id) 8 : 7
+if1 : identifier(public_id) 9 : 0
+char : keyword(char) 9 : 4
+int : keyword(int) 9 : 9
+str : identifier(public_id) 9 : 13
+123 : number(integer) 10 : 0
+12.134 : number(float) 10 : 4
+0b101001 : number(binary) 10 : 11
+0b88 : error(invalid_binary) 10 : 20
+.123 : error(invalid_leading_dot) 10 : 25
+0123 : number(integer) 10 : 31
+0b222 : error(invalid_binary) 10 : 36
+123.123e+23 : number(scientific_float) 10 : 42
+123.123.123 : error(invalid_float) 10 : 54
+12e2 : number(scientific) 11 : 0
+15.32e-24 : number(scientific_float) 11 : 5
+12e12.4 : error(invalid_scientific) 11 : 15
+abc : identifier(public_id) 12 : 0
+1 : number(integer) 12 : 4
+a : identifier(public_id) 12 : 5
+a1 : identifier(public_id) 12 : 7
+, : separator(comma) 12 : 10
+ффф : identifier(public_id) 12 : 12
+фf : identifier(public_id) 12 : 16
+fф : identifier(public_id) 12 : 19
+_abc : identifier(private_id) 12 : 22
+_ : error(unknown) 12 : 27
+_a_b : identifier(private_id) 12 : 29
+true1 : identifier(public_id) 13 : 0
+. : error(unknown) 13 : 6
+false : keyword(false) 13 : 7
+[ : bracket(bracket_sq_open) 13 : 13
+a : identifier(public_id) 13 : 14
+c : identifier(public_id) 13 : 16
+k : identifier(public_id) 13 : 18
+] : bracket(bracket_sq_close) 13 : 19
+= : operator(set) 13 : 20
+* : operator(multiply) 13 : 22
+ing : identifier(public_id) 14 : 0
+bool : keyword(bool) 14 : 5
++ : operator(plus) 14 : 10
+d : identifier(public_id) 14 : 12
+- : operator(minus) 14 : 13
+ssssssssssssssssssssssssssssssssssssssssssssssssss : error(overflow_id) 15 : 0
+= : operator(set) 16 : 0
+; : separator(semicolon) 16 : 2
+=== : operator(strict_equal) 16 : 4
+!= : operator(not_equal) 16 : 8
+2147483647 : number(integer) 21 : 0
+2147483646 : number(integer) 22 : 0
+2147483649 : number(integer) 23 : 0
+" : quote(double_quote) 24 : 0
+asd : identifier(public_id) 24 : 1
+asd : identifier(public_id) 24 : 5
+/* : error(unterminated_comment) 31 : 0
 Конец файла

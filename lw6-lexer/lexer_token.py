@@ -8,5 +8,5 @@ class Token(object):
         self.end_pos = end_pos
 
     def __str__(self):
-        return f"{self.item} : {self.type}({self.token_name}) line {self.line}, pos {self.start_pos}-{self.end_pos}"
+        return f"{self.item} : {self.type}({self.token_name}) {self.line} : {self.start_pos}"
         #return f"{self.type}({self.token_name}) '{self.item}' at line {self.line}, pos {self.start_pos}-{self.end_pos}"
