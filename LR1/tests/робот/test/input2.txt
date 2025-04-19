@@ -1,0 +1,1 @@
+start  left  turn_head on45 left step_( 9 )  on45 right step_( 9 ) left  stop

@@ -1,0 +1,1 @@
+start left  step_( 67890 )  hands_up  hands_up  hands_up  left hands_down  hands_down hands_down stop
