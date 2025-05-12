@@ -32,11 +32,16 @@ class Rule:
     def __init__(self, name: str, patterns: List[str]):
         self.name = name
         self.patterns = [p.split() for p in patterns]
+    def __str__(self):
+        return f"Rule(name={self.name}, patterns={self.patterns})"
 
 class RuleSet:
     def __init__(self, title: str, rules: Set[Rule]):
         self.title = title
         self.rules = {r.name: r for r in rules}
+    def __str__(self):
+        rules_str = ", ".join(str(rule) for rule in self.rules)
+        return f"RuleSet(title={self.title}, rules=[{rules_str}])"
 
 class RuleEngine:
     """Движок обработки правил"""
@@ -68,7 +73,9 @@ class RuleEngine:
         state = TextState(text)
 
         for rule_set in self.rule_sets:
+            print(f"Рассматриваем: {rule_set} из всего всех rule_sets")
             first_rule = next(iter(rule_set.rules.values()), None)
+            print(f"first_rule: {first_rule}")
             if first_rule and self._try_rule(first_rule, state) and state.at_end():
                 return rule_set, first_rule
 
@@ -77,7 +84,7 @@ class RuleEngine:
     def _try_rule(self, rule: Rule, state: TextState) -> bool:
         """Попытка применить правило с отслеживанием пути"""
         if rule.name in state.rule_path:  # Защита от циклической рекурсии
-            print(f"{rule.name} в {state.rule_path}")
+            print(f"Защита от циклической рекурсии: {rule.name} есть в {state.rule_path}")
             return False
         state.rule_path.append(rule.name)
         for pattern in rule.patterns:
