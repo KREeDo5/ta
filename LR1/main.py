@@ -1,6 +1,7 @@
 import sys
 from typing import List, Dict, Optional, Tuple, OrderedDict
 from collections import OrderedDict
+import re
 
 class TextState:
     """Состояние анализа текста с возможностью возврата"""
@@ -156,6 +157,8 @@ def main():
     except FileNotFoundError:
         print(f"Ошибка: файл не найден")
         return
+
+    text = re.sub(r'\s+', ' ', text)
 
     engine = RuleEngine()
     rule_set, matched_rule = engine.analyze(text)
