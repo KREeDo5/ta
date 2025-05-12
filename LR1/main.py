@@ -1,5 +1,5 @@
 import sys
-from typing import List, Dict, Optional, Set, Tuple
+from typing import List, Dict, Optional, Tuple, OrderedDict
 
 class TextState:
     """Состояние анализа текста с возможностью возврата"""
@@ -28,40 +28,51 @@ class TextState:
         """Проверка конца текста"""
         return self.pos >= len(self.text)
 
+    def remaining(self) -> str:
+        """Возвращает оставшуюся часть текста"""
+        return self.text[self.pos:]
+
 class Rule:
+    """Отдельное правило с вариантами"""
     def __init__(self, name: str, patterns: List[str]):
         self.name = name
         self.patterns = [p.split() for p in patterns]
-    def __str__(self):
+
+    def __repr__(self):
         return f"Rule(name={self.name}, patterns={self.patterns})"
 
 class RuleSet:
-    def __init__(self, title: str, rules: Set[Rule]):
+    """Набор правил с заголовком"""
+    def __init__(self, title: str, rules: List[Tuple[str, List[str]]]):
         self.title = title
-        self.rules = {r.name: r for r in rules}
-    def __str__(self):
-        rules_str = ", ".join(str(rule) for rule in self.rules)
-        return f"RuleSet(title={self.title}, rules=[{rules_str}])"
+        # Используем OrderedDict для сохранения порядка
+        self.rules = OrderedDict()
+        for name, patterns in rules:
+            self.rules[name] = Rule(name, patterns)
+
+    def __repr__(self):
+        return f"RuleSet(title={self.title}, rules={list(self.rules.values())})"
 
 class RuleEngine:
     """Движок обработки правил"""
     def __init__(self):
+        # Жестко заданные правила с сохранением порядка
         self.rule_sets = [
             RuleSet(
                 "Первый набор правил",
-                {
-                    Rule("A1", ["A1 ay A2", "A2"]),
-                    Rule("A2", ["A2 ку A3", "A3"]),
-                    Rule("A3", ["ух-ты", "хо A3", "ну A1 и_ну"])
-                }
+                [
+                    ("A1", ["A1 ay A2", "A2"]),
+                    ("A2", ["A2 ку A3", "A3"]),
+                    ("A3", ["ух-ты", "хо A3", "ну A1 и_ну"])
+                ]
             ),
             RuleSet(
                 "Второй набор правил",
-                {
-                    Rule("ПР1", ["ой ПР2 ай ПР3"]),
-                    Rule("ПР2", ["ну", "ну ПР2"]),
-                    Rule("ПР3", ["хо ПР3 хо", "ух-ты"])
-                }
+                [
+                    ("ПР1", ["ой ПР2 ай ПР3"]),
+                    ("ПР2", ["ну", "ну ПР2"]),
+                    ("ПР3", ["хо ПР3 хо", "ух-ты"])
+                ]
             )
         ]
         self.all_rules = {}
@@ -73,25 +84,38 @@ class RuleEngine:
         state = TextState(text)
 
         for rule_set in self.rule_sets:
-            print(f"Рассматриваем: {rule_set} из всего всех rule_sets")
-            first_rule = next(iter(rule_set.rules.values()), None)
-            print(f"first_rule: {first_rule}")
-            if first_rule and self._try_rule(first_rule, state) and state.at_end():
+            print(f"\nАнализируем набор правил: {rule_set.title}")
+            # Берем первое правило в порядке объявления
+            first_rule_name = next(iter(rule_set.rules.keys()))
+            first_rule = rule_set.rules[first_rule_name]
+
+            print(f"Пробуем начать с правила: {first_rule_name}")
+            if self._try_rule(first_rule, state) and state.at_end():
                 return rule_set, first_rule
+
+            # Сбрасываем состояние для следующего набора правил
+            state = TextState(text)
 
         return None, None
 
     def _try_rule(self, rule: Rule, state: TextState) -> bool:
         """Попытка применить правило с отслеживанием пути"""
         if rule.name in state.rule_path:  # Защита от циклической рекурсии
-            print(f"Защита от циклической рекурсии: {rule.name} есть в {state.rule_path}")
+            print(f"Обнаружена циклическая рекурсия для правила {rule.name}")
             return False
+
         state.rule_path.append(rule.name)
+        print(f"Входим в правило {rule.name}, текущий путь: {state.rule_path}")
+
         for pattern in rule.patterns:
             saved = state.save()
+            print(f"Пробуем шаблон: {' '.join(pattern)}")
             if self._try_pattern(pattern, state):
+                print(f"Шаблон {' '.join(pattern)} успешно применен")
                 return True
             state.restore(saved)
+            print(f"Откат состояния, позиция: {state.pos}")
+
         state.rule_path.pop()
         return False
 
@@ -100,10 +124,13 @@ class RuleEngine:
         for token in pattern:
             if token in self.all_rules:
                 if not self._try_rule(self.all_rules[token], state):
+                    print(f"Правило {token} не применилось")
                     return False
             else:
                 if not state.consume(token):
+                    print(f"Не удалось потребить токен '{token}'")
                     return False
+                print(f"Успешно потребили токен '{token}', остаток: '{state.remaining()}'")
         return True
 
 def main():
