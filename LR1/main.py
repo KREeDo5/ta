@@ -120,45 +120,19 @@ class RuleEngine:
         return False
 
     def _try_pattern(self, pattern: List[str], state: TextState) -> bool:
-        """Попытка применить шаблон правила"""
-        # Проверяем, содержит ли паттерн строки, которых нет в оставшемся тексте
-        remaining_text = state.remaining()
+        saved = state.save()
+
         for token in pattern:
-            if token not in self.all_rules and token not in remaining_text:
-                print(f"Пропускаем паттерн: {' '.join(pattern)}, так как '{token}' отсутствует в оставшем тексте: '{remaining_text}'")
-                return False
-
-        # Сначала проверяем первый токен без рекурсии
-        first_token = pattern[0]
-
-        if first_token in self.all_rules:
-            # Для правил - проверяем, есть ли подходящие подправила
-            rule = self.all_rules[first_token]
-            has_valid_pattern = any(
-                p[0] not in self.all_rules or
-                state.remaining().startswith(p[0])
-                for p in rule.patterns
-            )
-            if not has_valid_pattern:
-                print(f"Нет подходящих подправил для {first_token}")
-                return False
-        else:
-            # Для литералов - прямое сравнение
-            if not state.remaining().startswith(first_token):
-                print(f"Текст не начинается с '{first_token}'")
-                return False
-
-        # Если первая проверка прошла, продолжаем полный анализ
-        saved_state = state.save()
-        for i, token in enumerate(pattern):
             if token in self.all_rules:
                 if not self._try_rule(self.all_rules[token], state):
-                    state.restore(saved_state)
+                    state.restore(saved)
                     return False
             else:
                 if not state.consume(token):
-                    state.restore(saved_state)
+                    state.restore(saved)
                     return False
+                print(f"Успешно потребили '{token}', остаток: '{state.remaining()}'")
+
         return True
 
 def main():
