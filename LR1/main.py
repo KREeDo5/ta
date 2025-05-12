@@ -1,5 +1,6 @@
 import sys
 from typing import List, Dict, Optional, Tuple, OrderedDict
+from collections import OrderedDict
 
 class TextState:
     """Состояние анализа текста с возможностью возврата"""
@@ -18,19 +19,29 @@ class TextState:
         self.rule_path = list(state['path'])
 
     def consume(self, token: str) -> bool:
-        """Попытка потребить токен"""
+        """Попытка потребить токен с учетом пробелов"""
+        # Пропускаем ведущие пробелы
+        while self.pos < len(self.text) and self.text[self.pos].isspace():
+            self.pos += 1
+
         if self.text.startswith(token, self.pos):
             self.pos += len(token)
             return True
         return False
 
     def at_end(self) -> bool:
-        """Проверка конца текста"""
-        return self.pos >= len(self.text)
+        """Проверка конца текста (с учетом оставшихся пробелов)"""
+        pos = self.pos
+        while pos < len(self.text) and self.text[pos].isspace():
+            pos += 1
+        return pos >= len(self.text)
 
     def remaining(self) -> str:
-        """Возвращает оставшуюся часть текста"""
-        return self.text[self.pos:]
+        """Возвращает оставшийся текст (без ведущих пробелов)"""
+        pos = self.pos
+        while pos < len(self.text) and self.text[pos].isspace():
+            pos += 1
+        return self.text[pos:]
 
 class Rule:
     """Отдельное правило с вариантами"""
@@ -39,7 +50,7 @@ class Rule:
         self.patterns = [p.split() for p in patterns]
 
     def __repr__(self):
-        return f"Rule(name={self.name}, patterns={self.patterns})"
+        return f"Rule({self.name})"
 
 class RuleSet:
     """Набор правил с заголовком"""
@@ -51,7 +62,7 @@ class RuleSet:
             self.rules[name] = Rule(name, patterns)
 
     def __repr__(self):
-        return f"RuleSet(title={self.title}, rules={list(self.rules.values())})"
+        return f"RuleSet({self.title})"
 
 class RuleEngine:
     """Движок обработки правил"""
@@ -100,8 +111,9 @@ class RuleEngine:
 
     def _try_rule(self, rule: Rule, state: TextState) -> bool:
         """Попытка применить правило с отслеживанием пути"""
-        if rule.name in state.rule_path:  # Защита от циклической рекурсии
-            print(f"Обнаружена циклическая рекурсия для правила {rule.name}")
+        # Разрешаем повторное использование правил, но не в одном контексте
+        if rule.name in state.rule_path and state.rule_path[-1] == rule.name:
+            print(f"Предотвращена прямая рекурсия для {rule.name}")
             return False
 
         state.rule_path.append(rule.name)
@@ -111,7 +123,7 @@ class RuleEngine:
             saved = state.save()
             print(f"Пробуем шаблон: {' '.join(pattern)}")
             if self._try_pattern(pattern, state):
-                print(f"Шаблон {' '.join(pattern)} успешно применен")
+                print(f"Шаблон подошел! Остаток: '{state.remaining()}'")
                 return True
             state.restore(saved)
             print(f"Откат состояния, позиция: {state.pos}")
@@ -131,12 +143,12 @@ class RuleEngine:
                 if not state.consume(token):
                     state.restore(saved)
                     return False
-                print(f"Успешно потребили '{token}', остаток: '{state.remaining()}'")
+                print(f"\nУспешно потребили '{token}', остаток: '{state.remaining()}'\n")
 
         return True
 
 def main():
-    input_file = r"D:\Repos\Github\tyap\LR1\dist\monkey0.txt"
+    input_file = r"D:\Repos\Github\tyap\LR1\dist\monkey1.txt"
 
     try:
         with open(input_file, 'r', encoding='utf-8') as f:
