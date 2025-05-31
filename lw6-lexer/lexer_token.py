@@ -10,3 +10,13 @@ class Token(object):
     def __str__(self):
         return f"{self.item} : {self.type}({self.token_name}) {self.line} : {self.start_pos}"
         #return f"{self.type}({self.token_name}) '{self.item}' at line {self.line}, pos {self.start_pos}-{self.end_pos}"
+
+    def to_dict(self):
+        return {
+            "type": self.type,
+            "token_name": self.token_name,
+            "item": self.item,
+            "line": self.line,
+            "start_pos": self.start_pos,
+            "end_pos": self.end_pos
+        }
