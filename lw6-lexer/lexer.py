@@ -89,6 +89,14 @@ class Lexer(object):
             if token is None:
                 break
             yield token
+        yield Token(
+            type="separator",
+            token_name="end",
+            item="",
+            line=self.line,
+            start_pos=self.pos - self.line_start,
+            end_pos=self.pos - self.line_start,
+        )
 
 # Правила лексера
 rules = [
