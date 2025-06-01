@@ -127,6 +127,7 @@ rules = [
     (r'\bstring\b', 'string', 'keyword'),
     (r'\bbool\b', 'bool', 'keyword'),
     (r'\bif\b', 'if', 'keyword'),
+    (r'\belse\b', 'else', 'keyword'),
     (r'\bwhile\b', 'while', 'keyword'),
     (r'\bfor\b', 'for', 'keyword'),
     (r'\btrue\b', 'true', 'keyword'),
@@ -186,4 +187,6 @@ rules = [
     (r'>=', 'greater_equal', 'operator'),
     (r'<', 'less', 'operator'),
     (r'>', 'greater', 'operator'),
+    (r'&&', 'and', 'operator'),
+    (r'\|\|', 'or', 'operator'),
 ]
