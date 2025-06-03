@@ -161,7 +161,7 @@ rules = [
     (r'0[bB][^01\s]+', 'invalid_binary', 'error'),                            # Некорректные двоичные числа
     (r'0[oO][^0-7\s]+', 'invalid_octal', 'error'),                            # Некорректные восьмеричные числа
     (r'0[xX]([g-zG-Z]+|[\d]*[g-zG-Z]+[\d]*)', 'invalid_hex', 'error'),        # Некорректные шестнадцатеричные числа (0x1A45F0D)
-    (r'0[^bBoOxX0-9][\da-zA-Z]+', 'unsupported_number_system', 'error'),      # Неподдерживаемая система счисления
+    (r'0[^bBoOxX0-9\.][\da-zA-Z]+', 'unsupported_number_system', 'error'),    # Неподдерживаемая система счисления
     (r'(\d+\.\d+[\.]+[\d]*)', 'invalid_float', 'error'),                      # Лишние точки в числе
     (r'\d+e[+-]?\d+\.\d+', 'invalid_scientific', 'error'),                    # Неверная научная нотация
     (r'\.\d+', 'invalid_leading_dot', 'error'),                               # Начало с точки без целой части
