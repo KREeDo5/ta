@@ -103,47 +103,47 @@ rules = [
     # Комментарии
     (r'//.*', 'single_line_comment', 'comment'),
     (r'/\*[\s\S]*?\*/', 'multi_line_comment', 'comment'),
-
+    # Незавершённый многострочный комментарий
     (r'/\*', 'unterminated_comment', 'error'),
 
     # Символьные литералы (char)
-    (r'"(?:.|\\.)"', 'double_quoted_char', 'char_literal'),
-    (r"'(?:.|\\.)'", 'single_quoted_char', 'char_literal'),
+    (r'"(?:.|\\.)"', 'double_quoted_char', 'char_literal'),                   # Символьный литерал в двойных кавычках
+    (r"'(?:.|\\.)'", 'single_quoted_char', 'char_literal'),                   # Символьный литерал в одинарных кавычках
 
     # Строковые литералы
-    (r'"(?:[^"\\]|\\.)*"', 'double_quoted_string', 'string_literal'),
-    (r"'(?:[^'\\]|\\.)*'", 'single_quoted_string', 'string_literal'),
+    (r'"(?:[^"\\]|\\.)*"', 'double_quoted_string', 'string_literal'),         # Строка в двойных кавычках
+    (r"'(?:[^'\\]|\\.)*'", 'single_quoted_string', 'string_literal'),         # Строка в одинарных кавычках
 
     # (r'"', 'double_quote', 'quote'),
     # (r"'", 'single_quote', 'quote'),
 
+    # Незакрытые кавычки и скобки
     (r'"', 'unterminated_double_quote', 'error'),
     (r"'", 'unterminated_single_quote', 'error'),
-
     (r'\((?:[^"\\]|\\.)*"$', 'unterminated_bracket_open', 'error'),
     (r'\{(?:[^\'\\]|\\.)*\'$', 'unterminated_brace_open', 'error'),
     (r'\[(?:[^\'\\]|\\.)*\'$', 'unterminated_bracket_sq_open', 'error'),
 
     # Скобки
-    (r'\(', 'bracket_open', 'bracket'),
-    (r'\)', 'bracket_close', 'bracket'),
-    (r'\{', 'brace_open', 'bracket'),
-    (r'\}', 'brace_close', 'bracket'),
-    (r'\[', 'bracket_sq_open', 'bracket'),
-    (r'\]', 'bracket_sq_close', 'bracket'),
+    (r'\(', 'bracket_open', 'bracket'),                                       # Открывающая круглая скобка (
+    (r'\)', 'bracket_close', 'bracket'),                                      # Закрывающая круглая скобка )
+    (r'\{', 'brace_open', 'bracket'),                                         # Открывающая фигурная скобка {
+    (r'\}', 'brace_close', 'bracket'),                                        # Закрывающая фигурная скобка }
+    (r'\[', 'bracket_sq_open', 'bracket'),                                    # Открывающая квадратная скобка [
+    (r'\]', 'bracket_sq_close', 'bracket'),                                   # Закрывающая квадратная скобка ]
 
-    # Условные конструкции
-    (r'\bint\b', 'int', 'keyword'),
-    (r'\bdouble\b', 'double', 'keyword'),
-    (r'\bchar\b', 'char', 'keyword'),
-    (r'\bstring\b', 'string', 'keyword'),
-    (r'\bbool\b', 'bool', 'keyword'),
-    (r'\bif\b', 'if', 'keyword'),
-    (r'\belse\b', 'else', 'keyword'),
-    (r'\bwhile\b', 'while', 'keyword'),
-    (r'\bfor\b', 'for', 'keyword'),
-    (r'\btrue\b', 'true', 'keyword'),
-    (r'\bfalse\b', 'false', 'keyword'),
+    # Ключевые слова
+    (r'\bint\b', 'int', 'keyword'),                                           # Целочисленный тип (int)
+    (r'\bdouble\b', 'double', 'keyword'),                                     # Число с плавающей точкой (double)
+    (r'\bchar\b', 'char', 'keyword'),                                         # Символьный тип (char)
+    (r'\bstring\b', 'string', 'keyword'),                                     # Строковый тип (string)
+    (r'\bbool\b', 'bool', 'keyword'),                                         # Логический тип (bool)
+    (r'\bif\b', 'if', 'keyword'),                                             # Условный оператор (if)
+    (r'\belse\b', 'else', 'keyword'),                                         # Альтернативный условный оператор (else)
+    (r'\bwhile\b', 'while', 'keyword'),                                       # Цикл while (while)
+    (r'\bfor\b', 'for', 'keyword'),                                           # Цикл for (for)
+    (r'\btrue\b', 'true', 'keyword'),                                         # Логическое значение true (true)
+    (r'\bfalse\b', 'false', 'keyword'),                                       # Логическое значение false (false)
 
     # Длинные ошибочные идентификаторы (30 >=)
     (r'_?[_a-zA-Zа-яА-ЯёЁ0-9\.]{30,}', 'overflow_id', 'error'),
@@ -180,25 +180,25 @@ rules = [
     (r'0[xX]$', 'unterminated_hex', 'error'),                                 # Незавершённый префикс шестнадцатеричных чисел
 
     # Разделители
-    (r';', 'semicolon', 'separator'),
-    (r',', 'comma', 'separator'),
-    (r'/n', 'newline', 'separator'),
-    (r'/t', 'tab', 'separator'),
+    (r';', 'semicolon', 'separator'),                                         # Точка с запятой (;)
+    (r',', 'comma', 'separator'),                                             # Запятая (,)
+    (r'/n', 'newline', 'separator'),                                          # Новая строка (\n)
+    (r'/t', 'tab', 'separator'),                                              # Табуляция
 
     # Операторы
-    (r'\+', 'plus', 'operator'),
-    (r'-', 'minus', 'operator'),
-    (r'\*', 'multiply', 'operator'),
-    (r'/', 'divide', 'operator'),
-    (r'%', 'module', 'operator'),
-    (r'!=', 'not_equal', 'operator'),
-    (r'===', 'strict_equal', 'operator'),
-    (r'==', 'equal', 'operator'),
-    (r'=', 'set', 'operator'),
-    (r'<=', 'less_equal', 'operator'),
-    (r'>=', 'greater_equal', 'operator'),
-    (r'<', 'less', 'operator'),
-    (r'>', 'greater', 'operator'),
-    (r'&&', 'and', 'operator'),
-    (r'\|\|', 'or', 'operator'),
+    (r'\+', 'plus', 'operator'),                                              # Сложение (+)
+    (r'-', 'minus', 'operator'),                                              # Вычитание (-)
+    (r'\*', 'multiply', 'operator'),                                          # Умножение (*)
+    (r'/', 'divide', 'operator'),                                             # Деление (/)
+    (r'%', 'module', 'operator'),                                             # Остаток от деления (%)
+    (r'!=', 'not_equal', 'operator'),                                         # Неравенство (!=)
+    (r'===', 'strict_equal', 'operator'),                                     # Строгое равенство (===)
+    (r'==', 'equal', 'operator'),                                             # Равенство (==)
+    (r'=', 'set', 'operator'),                                                # Присваивание (=)
+    (r'<=', 'less_equal', 'operator'),                                        # Меньше или равно (<=)
+    (r'>=', 'greater_equal', 'operator'),                                     # Больше или равно (>=)
+    (r'<', 'less', 'operator'),                                               # Меньше (<)
+    (r'>', 'greater', 'operator'),                                            # Больше (>)
+    (r'&&', 'and', 'operator'),                                               # Логическое И (&&)
+    (r'\|\|', 'or', 'operator'),                                              # Логическое ИЛИ (||)
 ]
