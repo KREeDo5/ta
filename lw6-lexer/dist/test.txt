@@ -1,6 +1,17 @@
+"d{"
+"a"
+"\n"
+"/"
+'\'
+"'"
+'"'
+"// Comme
+nt"
+"// Comment"
+//"// Comment"
+// Comment
 if
 else A && B || C
-// Comment
 (string)
 {
 asd

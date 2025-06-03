@@ -106,19 +106,23 @@ rules = [
 
     (r'/\*', 'unterminated_comment', 'error'),
 
+    # Символьные литералы (char)
+    (r'"(?:.|\\.)"', 'double_quoted_char', 'char_literal'),
+    (r"'(?:.|\\.)'", 'single_quoted_char', 'char_literal'),
+
     # Строковые литералы
-    # (r'"(?:[^"\\]|\\.)*"', 'double_quoted_string', 'string_literal'),
-    # (r"'(?:[^'\\]|\\.)*'", 'single_quoted_string', 'string_literal'),
+    (r'"(?:[^"\\]|\\.)*"', 'double_quoted_string', 'string_literal'),
+    (r"'(?:[^'\\]|\\.)*'", 'single_quoted_string', 'string_literal'),
 
-    (r'"', 'double_quote', 'quote'),
-    (r"'", 'single_quote', 'quote'),
+    # (r'"', 'double_quote', 'quote'),
+    # (r"'", 'single_quote', 'quote'),
 
-    # (r'"', 'unterminated_double_quote', 'error'),
-    # (r"'", 'unterminated_single_quote', 'error'),
+    (r'"', 'unterminated_double_quote', 'error'),
+    (r"'", 'unterminated_single_quote', 'error'),
 
-    # (r'\((?:[^"\\]|\\.)*"', 'unterminated_bracket_open', 'error'),
-    # (r"\{(?:[^'\\]|\\.)*'", 'unterminated_brace_open', 'error'),
-    # (r"\[(?:[^'\\]|\\.)*'", 'unterminated_bracket_sq_open', 'error'),
+    (r'\((?:[^"\\]|\\.)*"$', 'unterminated_bracket_open', 'error'),
+    (r'\{(?:[^\'\\]|\\.)*\'$', 'unterminated_brace_open', 'error'),
+    (r'\[(?:[^\'\\]|\\.)*\'$', 'unterminated_bracket_sq_open', 'error'),
 
     # Скобки
     (r'\(', 'bracket_open', 'bracket'),
